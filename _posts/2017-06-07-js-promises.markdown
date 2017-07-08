@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "JS Promises"
-date:   2017-07-08 09:34:24 +0200
-categories: jekyll update
+date:   2017-06-07 09:34:24 +0200
+categories: tutorial
 ---
 
 In the previous post, we used the XMLHttpRequest object which is a very simple and basic way of requesting data from the server. Recently, the ECMAScript 6 introduced a new API called Promises in the hopes of making asynchronous requests more pleasant. We’re gonna take a look at what Promises are and understand them through a little bit of an exercise.
