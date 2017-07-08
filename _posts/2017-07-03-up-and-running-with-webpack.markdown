@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Up and Running with Webpack"
-date:   2017-07-08 09:34:24 +0200
+date:   2017-07-03 09:34:24 +0200
 categories: tutorial
 ---
 
