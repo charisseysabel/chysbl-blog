@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Synchronous and Asynchronous Requests in Javascript"
-date:   2017-06-07 09:34:24 +0200
+date:   2017-05-07 09:34:24 +0200
 categories: tutorial
 ---
 
