@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Assistant');
+
 /**
  * Reset some basic elements
  */
@@ -11,8 +13,8 @@ dl, dd, ol, ul, figure {
  * Basic styling
  */
 body {
-  font: 400 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
-  color: #111;
+  font: 400 16px/1.5 "Assistant", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #424242;
   background-color: #fdfdfd;
   -webkit-text-size-adjust: 100%;
   -webkit-font-feature-settings: "kern" 1;
@@ -154,19 +156,18 @@ pre {
  * Site header
  */
 .site-header {
-  border-bottom: 1px solid #e8e8e8;
   min-height: 55.95px;
   position: relative; }
 
 .site-title {
-  font-size: 26px;
-  font-weight: 300;
   line-height: 54px;
   letter-spacing: -1px;
   margin-bottom: 0;
-  float: left; }
+  text-transform: uppercase;
+  float: left;
+  letter-spacing: 3px; }
   .site-title, .site-title:visited {
-    color: #424242; }
+    color: #F18620; }
 
 .site-nav {
   float: right;
@@ -176,7 +177,7 @@ pre {
   .site-nav .menu-icon {
     display: none; }
   .site-nav .page-link {
-    color: #111;
+    color: #424242;
     line-height: 1.5; }
     .site-nav .page-link:not(:last-child) {
       margin-right: 20px; }
@@ -278,7 +279,9 @@ pre {
   padding: 30px 0; }
 
 .page-heading {
-  font-size: 20px; }
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 3px; }
 
 .post-list {
   margin-left: 0;
@@ -288,6 +291,7 @@ pre {
 
 .post-meta {
   font-size: 14px;
+  text-transform: uppercase;
   color: #828282; }
 
 .post-link {
@@ -298,12 +302,13 @@ pre {
  * Posts
  */
 .post-header {
-  margin-bottom: 30px; }
+  margin-bottom: 30px;
+  text-align: center;}
 
 .post-title {
   font-size: 42px;
   letter-spacing: -1px;
-  line-height: 1; }
+  line-height: 1;}
   @media screen and (max-width: 800px) {
     .post-title {
       font-size: 36px; } }
