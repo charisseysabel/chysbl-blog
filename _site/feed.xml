@@ -1,5 +1,48 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.5.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2017-07-15T09:49:31+02:00</updated><id>http://localhost:4000/</id><title type="html">Charisse Writes</title><subtitle>Hey! I'm Charisse. I'm a web developer and artist living a (almost) zero-waste life in Berlin 🌱
-</subtitle><entry><title type="html">Up and Running with Webpack</title><link href="http://localhost:4000/tutorial/2017/07/03/up-and-running-with-webpack.html" rel="alternate" type="text/html" title="Up and Running with Webpack" /><published>2017-07-03T09:34:24+02:00</published><updated>2017-07-03T09:34:24+02:00</updated><id>http://localhost:4000/tutorial/2017/07/03/up-and-running-with-webpack</id><content type="html" xml:base="http://localhost:4000/tutorial/2017/07/03/up-and-running-with-webpack.html">&lt;p&gt;One of the most important things you have to have in your toolkit these days is the ability to use &lt;em&gt;Webpack&lt;/em&gt; — and for a good reason. Webpack is a module bundler. It takes your assets — your JS files, CSS, images, etc — and outputs it as a single file, saving you with tons of trips back and forth from the server.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.5.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2017-07-15T15:41:48+02:00</updated><id>http://localhost:4000/</id><title type="html">Charisse Writes</title><subtitle>Hey! I'm Charisse. I'm a web developer and artist living a (almost) zero-waste life in Berlin 🌱
+</subtitle><entry><title type="html">Goals without Deadlines</title><link href="http://localhost:4000/personal-development/2017/07/15/goals-without-deadlines.html" rel="alternate" type="text/html" title="Goals without Deadlines" /><published>2017-07-15T15:00:00+02:00</published><updated>2017-07-15T15:00:00+02:00</updated><id>http://localhost:4000/personal-development/2017/07/15/goals-without-deadlines</id><content type="html" xml:base="http://localhost:4000/personal-development/2017/07/15/goals-without-deadlines.html">&lt;p&gt;Have you ever failed to reach a goal? Like so many other people out there, I too, have set a goal for myself and in one way or another, failed to reach that goal on a set date.&lt;/p&gt;
+
+&lt;p&gt;This is a blogpost outlining the talk that I have given at Women Who Code Berlin.&lt;/p&gt;
+
+&lt;p&gt;So what exactly are goals? People have different definitions about it but for me, goals are the things or the outcomes that we want to achieve in life. It’s as simple as that.&lt;/p&gt;
+
+&lt;p&gt;Many self-help or personal development articles out there suggest that we create SMART goals. That is, goals that are Specific, Measurable, Achievable, Realistic, and Timely. And although I used to agree with all of those, I soon found out that deadlines didn’t work for me very much. So I set out on an epic google research and set some time to do some personal reflection to find out why.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-problem-with-deadlines&quot;&gt;The Problem with Deadlines&lt;/h2&gt;
+&lt;p&gt;Creating goals are fun. They are a good source of motivation. But I realised that once I’ve set a date on a goal, I am immediately pressured to do something — to keep working; to stay ahead. And that might be a good boost for some people, but I didn’t like being driven by a due date.&lt;/p&gt;
+
+&lt;p&gt;Once there is pressure, there is also stress. And stress leads to poor performance. I’ve read quite a handful of research findings that stress reduces our rational decision-making skills, makes us short-tempered, kills our attention span, and if you’re really really stressed, it can actually lead to heart disease.&lt;/p&gt;
+
+&lt;p&gt;But let’s not forget the feeling of disappointment when we fail to achieve our goal. And that sucks just as much.&lt;/p&gt;
+
+&lt;p&gt;So I decided to stop setting deadlines.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-power-of-a-schedule&quot;&gt;The Power of a Schedule&lt;/h2&gt;
+&lt;p&gt;After a bit of research to find more ways to effectively achieve my goals, I came across &lt;a href=&quot;http://jamesclear.com/schedule-goals&quot;&gt;an article from James Clear&lt;/a&gt;. He says:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;a better way to approach your goals is to set a schedule to operate by rather than a deadline to perform by&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Having a schedule keeps me organised. For example, every morning when I get in to work, one of the first things that I do is to figure out what I need to do for that day and list them down. It keeps me from procrastinating because I don’t have to stop and look around for things I need to do because well, I know them ahead of time. Sometimes I even try to figure out what I need to do the night before, and that gives me the mindset of “I have stuff to do” the next morning, which helps me to not linger in bed for too long.&lt;/p&gt;
+
+&lt;h2 id=&quot;how-to-set-a-schedule&quot;&gt;How to Set a Schedule&lt;/h2&gt;
+&lt;h3 id=&quot;plan-ahead&quot;&gt;Plan Ahead&lt;/h3&gt;
+&lt;p&gt;The core part of scheduling is figuring out what you need to do ahead of time. I usually sit down and plan stuff out every two weeks. Since I almost always work on multiple goals, I feel 2 weeks is the best time frame for me to finish some tasks compared to monthly or weekly plans. A two-week plan might not work for you, so adjust as you see fit.&lt;/p&gt;
+
+&lt;h3 id=&quot;prioritise&quot;&gt;Prioritise&lt;/h3&gt;
+&lt;p&gt;Next, I list down all the things I want to do in the next couple of weeks that’s related to my goal. I usually don’t include other activities such as doing groceries, going to work, chores, etc. because I can figure that out in the morning or the night before.&lt;/p&gt;
+
+&lt;p&gt;You want to break down your tasks so that they are small enough but not too small that they become boring and effortless. The reason why we do this is because we want feedback. Knowing that we’re making progress is a good motivation to keep going.&lt;/p&gt;
+
+&lt;p&gt;Once I have a list, I know that that’s all I need to focus on in the coming weeks. Then, in the morning, I pick the most important task (or tasks if I know I will have more free time) that I can do in order to make some progress. I know, when it comes to our goals, everything seems important, right? But if you can’t decide which task is more important, just pick anything. Sometimes its enough to just do something.&lt;/p&gt;
+
+&lt;p&gt;I don’t set a fixed time to work on any task because I suck at estimation and quite often some tasks really just take longer than you would’ve expected. So why bother?&lt;/p&gt;
+
+&lt;h3 id=&quot;dont-be-too-hard-on-yourself&quot;&gt;Don’t be too hard on yourself&lt;/h3&gt;
+&lt;p&gt;Often times, stuff come up in the middle of the week that has to be attended. Other times, you just don’t feel like doing anything. You may have to put off some tasks until next week or you might not be able to do everything that you planned out to do. Or maybe you just have to take a break. And that’s okay. Enjoy where you are in the process but don’t linger around too long because that won’t help you achieve your goal either.&lt;/p&gt;
+
+&lt;h3 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h3&gt;
+&lt;p&gt;The key to achieving our goal is consistency. Having a schedule serves as a guide that helps us form a habit, which can then help us achieve our goals. In this fast paced-world, it’s okay to slow down and take our time to do things in our own pace. Living this way is much more enjoyable but still incredibly rewarding.&lt;/p&gt;</content><author><name></name></author><summary type="html">Have you ever failed to reach a goal? Like so many other people out there, I too, have set a goal for myself and in one way or another, failed to reach that goal on a set date.</summary></entry><entry><title type="html">Up and Running with Webpack</title><link href="http://localhost:4000/tutorial/2017/07/03/up-and-running-with-webpack.html" rel="alternate" type="text/html" title="Up and Running with Webpack" /><published>2017-07-03T09:34:24+02:00</published><updated>2017-07-03T09:34:24+02:00</updated><id>http://localhost:4000/tutorial/2017/07/03/up-and-running-with-webpack</id><content type="html" xml:base="http://localhost:4000/tutorial/2017/07/03/up-and-running-with-webpack.html">&lt;p&gt;One of the most important things you have to have in your toolkit these days is the ability to use &lt;em&gt;Webpack&lt;/em&gt; — and for a good reason. Webpack is a module bundler. It takes your assets — your JS files, CSS, images, etc — and outputs it as a single file, saving you with tons of trips back and forth from the server.&lt;/p&gt;
 
 &lt;p&gt;I gotta admit, the first time I’ve set up my own Webpack configuration file, I was pretty stoked and nervous and overwhelmed at the same time. But its important to know that Webpack is just another javascript file. It’s just a configuration file that you set up and run on the command line that will automatically does what you tell it to do. It is incredibly powerful, so its worth investing some time learning it.&lt;/p&gt;
 
