@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Assistant');
-
+@import url("https://fonts.googleapis.com/css?family=Assistant");
 /**
  * Reset some basic elements
  */
@@ -234,7 +233,8 @@ pre {
 .contact-list,
 .social-media-list {
   list-style: none;
-  margin-left: 0; }
+  margin-left: 0;
+  text-align: right; }
 
 .footer-col-wrapper {
   font-size: 15px;
@@ -244,11 +244,13 @@ pre {
 .footer-col {
   float: left;
   margin-bottom: 15px;
-  padding-left: 15px; }
+  padding-left: 15px;
+  width: -webkit-calc((100% / 2) - 15px );
+  width: calc((100% / 2) - 15px ); }
 
 .footer-col-1 {
-  width: -webkit-calc(35% - (30px / 2));
-  width: calc(35% - (30px / 2)); }
+  width: -webkit-calc((100% / 2) - 15px );
+  width: calc((100% / 2) - 15px ); }
 
 .footer-col-2 {
   width: -webkit-calc(20% - (30px / 2));
@@ -261,8 +263,8 @@ pre {
 @media screen and (max-width: 800px) {
   .footer-col-1,
   .footer-col-2 {
-    width: -webkit-calc(50% - (30px / 2));
-    width: calc(50% - (30px / 2)); }
+    width: -webkit-calc((100% / 2) - 15px );
+    width: calc((100% / 2) - 15px ); }
 
   .footer-col-3 {
     width: -webkit-calc(100% - (30px / 2));
@@ -303,12 +305,12 @@ pre {
  */
 .post-header {
   margin-bottom: 30px;
-  text-align: center;}
+  text-align: center; }
 
 .post-title {
   font-size: 42px;
   letter-spacing: -1px;
-  line-height: 1;}
+  line-height: 1; }
   @media screen and (max-width: 800px) {
     .post-title {
       font-size: 36px; } }
