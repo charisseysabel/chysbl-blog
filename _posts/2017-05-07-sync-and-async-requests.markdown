@@ -60,11 +60,11 @@ The server also gives back a status code, indicating if the response was success
 
 {% highlight javascript %}
 xhr.addEventListener('readystatechange', function(e) {
-    if(xhr.readyState === 4 && xhr.status === 200) {
-       // do something with data
-    } else {
-      console.log('something went wrong.');
-    }
+  if(xhr.readyState === 4 && xhr.status === 200) {
+    // do something with data
+  } else {
+    console.log('something went wrong.');
+  }
 });
 {% endhighlight %}
 
@@ -104,8 +104,10 @@ Here's the full block of code:
 
 {% highlight javascript %}
 var xhr = new XMLHttpRequest();
+
 xhr.open('GET', 'https://gist.githubusercontent.com/JulianvBeek/99a950c6711215d41a88d184ab99d75c/raw/d8a4a71e4356e1f163d815b398a6b1984715db87/site.json', false);
 xhr.send();
+
 xhr.addEventListener('readystatechange', function(e) {
  console.log(xhr.readyState);
  if(xhr.readyState === 4 && xhr.status === 200) {

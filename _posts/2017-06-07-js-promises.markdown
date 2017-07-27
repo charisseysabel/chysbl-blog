@@ -33,17 +33,18 @@ Let’s create function that performs a simple asynchronous HTTP request. We wra
 {% highlight javascript %}
 function get(url) {
   return new Promise(function(resolve, reject) {
-  		var xhr = new XMLHttpRequest();
-		xhr.open('GET', url, true);
-  		xhr.send();
-  		xhr.addEventListener('readystatechange', function(e) {
-      	if(xhr.status === 200) {
-     		 	resolve(JSON.parse(xhr.responseText));
-     		}
-     		else {
-       		reject(xhr.status);
-     		}
-		});
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
+    xhr.send();
+
+    xhr.addEventListener('readystatechange', function(e) {
+      if(xhr.status === 200) {
+        resolve(JSON.parse(xhr.responseText));
+      }
+      else {
+        reject(xhr.status);
+      }
+    });
   });
 }
 {% endhighlight %}

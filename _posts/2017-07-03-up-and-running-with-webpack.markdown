@@ -139,21 +139,21 @@ So, in the example below, we tell webpack that for every `.less` file that it en
 {% highlight javascript %}
 ...
 module.exports = {
-	...
-	module: {
-		rules: [
-			{
-				test: /\.less$/,
-				use: [{
-					loader: style-loader,
-				}, {
-					loader: 'css-loader',
-				}, {
-					loader: 'less-loader',
-				}],
-			},
-		],
-	},
+  ...
+  module: {
+    rules: [
+      {
+        test: /\.less$/,
+        use: [{
+          loader: style-loader,
+        }, {
+          loader: 'css-loader',
+        }, {
+          loader: 'less-loader',
+        }],
+      },
+    ],
+  },
 };
 {% endhighlight %}
 
@@ -180,15 +180,15 @@ var htmlWebpackPlugin = require('html-webpack-plugin');
 Then, in your `module.exports` object, create a new instance of HtmlWebpackPlugin object inside the plugins array:
 {% highlight javascript %}
 ...
-module.exports = {
-	...
-	plugins: [
-		new HtmlWebpackPlugin({
-			template: './index.html',
-			inject: 'body',
-		})
-	]
-};
+  module.exports = {
+  ...
+    plugins: [
+      new HtmlWebpackPlugin({
+        template: './index.html',
+        inject: 'body',
+      })
+    ]
+  };
 {% endhighlight %}
 
 Here, I specified a configuration object containing a template property inside the new HtmlWebpackPlugin instance. When I run webpack on the command line, HtmlWebpackPlugin takes the template HTML file and creates a new one in the `dist` folder. This new HTML file will contain our bundled assets injected at the end of the `body` tag. Pretty cool.
