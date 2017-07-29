@@ -288,7 +288,9 @@ pre {
   margin-left: 0;
   list-style: none; }
   .post-list > li {
-    margin-bottom: 20px; }
+    margin-bottom: 60px; }
+    .post-list > li h2 {
+      margin-bottom: 0; }
 
 .post-meta {
   font-size: 15.75px;
