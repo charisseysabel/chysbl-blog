@@ -290,7 +290,8 @@ pre {
   .post-list > li {
     margin-bottom: 60px; }
     .post-list > li h2 {
-      margin-bottom: 0; }
+      margin-bottom: 0;
+      font-weight: 600; }
 
 .post-meta {
   font-size: 15.75px;
