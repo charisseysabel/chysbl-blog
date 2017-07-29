@@ -254,6 +254,7 @@
 
   h4 {
     @include relative-font-size(1.25);
+    font-weight: $semi-bold;
 
     @include media-query($on-laptop) {
       @include relative-font-size(1.125);

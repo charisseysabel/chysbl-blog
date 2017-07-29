@@ -20,7 +20,7 @@ The difference between synchronous and asynchronous requests can be best explain
 
 The introduction of asynchronous requests took the web by storm. Things work a little differently when you request data asynchronously. Asynchronous requests allows you to move on to another task before the previous one ever finishes. This functionality was given the term AJAX, or Asynchronous JavaScript and XML. So whenever you hear the term AJAX it basically means that they are handling data asynchronously.
 
-### Make a HTTP Request
+## Make a HTTP Request
 
 Now that we've stated the difference and when they are most useful, how exactly do we make a HTTP request? In this quick tutorial, we're gonna request a JSON file from a GitHub Gist synchronously (and asynchronously!) using the XMLHttpRequest method. Note that there are other, more modern ways to make a HTTP request using Javascript but we're gonna go with the most basic one for now.
 
@@ -31,7 +31,7 @@ var xhr = new XMLHttpRequest();
 
 If you log this variable in the console, you can see all the methods that are now available for us to use.
 
-### Initialise a request
+#### Initialise a request
 
 The next step is to initialise a request using the `.open()` method. The `.open()` method takes 5 arguments, 3 of which are optional:
 
@@ -48,7 +48,7 @@ xhr.send();
 {% endhighlight %}
 Okay, our script now runs off to Serverland and fetches the data for us. Since we requested the data asynchronously, we can do other tasks instead of waiting for the response to return. But how do we know when the response has actually returned?
 
-### Listening for an event
+#### Listening for an event
 
 Once we've sent a request to the server, we have to find out if the response has returned or if the request has failed. We do this by listening for a change in the `readyState()` method.
 
@@ -68,7 +68,7 @@ xhr.addEventListener('readystatechange', function(e) {
 });
 {% endhighlight %}
 
-### Process the data
+#### Process the data
 
 We made a request and confirmed that the status was successful. Now what?
 
@@ -80,7 +80,7 @@ console.log(JSON.parse(xhr.responseText));
 
 Now you have a raw data that you can play around with!
 
-### Synchronous Requests
+## Synchronous Requests
 
 We can create synchronous requests using the XMLHttpRequest object by setting the third parameter to `false`. You might not notice the difference if you have a high speed internet but you can simulate a slow connection on the Network tab on your DevTools.
 
@@ -96,7 +96,7 @@ Add another `console.log` statement after the HTTP request. Run the code and see
 
 See how the screen seems to have been frozen? With a slow connection combined with a synchronous request to the server, we didn't have a choice but to wait for the request to finish and come back before we can do something again.
 
-### Conclusion
+## Conclusion
 
 Synchronous requests waits and blocks until the response come back. In most cases, we want to use asynchronous requests to give our users a better experience.
 

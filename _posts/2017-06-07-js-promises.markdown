@@ -7,7 +7,7 @@ categories: tutorial
 
 In the previous post, we used the XMLHttpRequest object which is a very simple and basic way of requesting data from the server. Recently, the ECMAScript 6 introduced a new API called Promises in the hopes of making asynchronous requests more pleasant. We’re gonna take a look at what Promises are and understand them through a little bit of an exercise.
 
-### What are Promises?
+## What are Promises?
 I have to admit that when I first heard someone say, “It returns a Promise”, I immediately go blank. What do you mean by “Promise”?
 
 *In all simplicity, Promises are just objects.* They serve as placeholders for the data you’re retrieving that has not yet returned. A Promise object immediately returns even before the HTTP Request has been resolved.
@@ -20,7 +20,7 @@ Suppose that you want to retrieve 2 sets of data from the server — where the s
 
 This method can easily go out of hand, which is then referred to as “ [callback hell](http://callbackhell.com/) “ where you invoke callbacks from callbacks from callbacks. Even though there are multiple ways of making it not look too complicated, using the Promise API is much more cleaner and easier to maintain and understand.
 
-### How does a Promise work?
+## How does a Promise work?
 A Promise takes a function as a callback. That function takes two arguments:
 
 - a function that is called when the request is resolved / successful (usually named "resolve")
@@ -108,9 +108,9 @@ get(housePets)
 
 > You could compare the Promise API to the step by step of making a burger. First, you run off to get the bottom bun (initial request). When I have my bottom bun, I can THEN put in the lettuce, THEN the patty, THEN some cheese, THEN tomatoes, and so on. If, for some reason I am missing a bottom bun, I have to return to the customer and tell them that we can’t make burgers anymore (stating the error)
 
-### Support
+## Support
 Note that Promises are not being supported across all browsers so you have to use polyfills!
 
 
-### Conclusion
+## Conclusion
 Promises serve as placeholders for the data you’re retrieving that has not yet returned. It gives us to have access to a `.then` method which allows us to access the data that has been returned. Promises makes asynchronous HTTP request easier to understand and maintain, avoiding what is known as “callback hell”.

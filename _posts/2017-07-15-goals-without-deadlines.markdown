@@ -30,10 +30,10 @@ After a bit of research to find more ways to effectively achieve my goals, I cam
 Having a schedule keeps me organised. For example, every morning when I get in to work, one of the first things that I do is to figure out what I need to do for that day and list them down. It keeps me from procrastinating because I don’t have to stop and look around for things I need to do because well, I know them ahead of time. Sometimes I even try to figure out what I need to do the night before, and that gives me the mindset of “I have stuff to do” the next morning, which helps me to not linger in bed for too long.
 
 ## How to Set a Schedule
-### Plan Ahead
+#### Plan Ahead
 The core part of scheduling is figuring out what you need to do ahead of time. I usually sit down and plan stuff out every two weeks. Since I almost always work on multiple goals, I feel 2 weeks is the best time frame for me to finish some tasks compared to monthly or weekly plans. A two-week plan might not work for you, so adjust as you see fit.
 
-### Prioritise
+#### Prioritise
 Next, I list down all the things I want to do in the next couple of weeks that’s related to my goal. I usually don’t include other activities such as doing groceries, going to work, chores, etc. because I can figure that out in the morning or the night before.
 
 You want to break down your tasks so that they are small enough but not too small that they become boring and effortless. The reason why we do this is because we want feedback. Knowing that we’re making progress is a good motivation to keep going.
@@ -43,9 +43,9 @@ Once I have a list, I know that that’s all I need to focus on in the coming we
 I don’t set a fixed time to work on any task because I suck at estimation and quite often some tasks really just take longer than you would’ve expected. So why bother?
 
 
-### Don’t be too hard on yourself
+#### Don’t be too hard on yourself
 Often times, stuff come up in the middle of the week that has to be attended. Other times, you just don’t feel like doing anything. You may have to put off some tasks until next week or you might not be able to do everything that you planned out to do. Or maybe you just have to take a break. And that’s okay. Enjoy where you are in the process but don’t linger around too long because that won’t help you achieve your goal either.
 
 
-### Conclusion
+## Conclusion
 The key to achieving our goal is consistency. Having a schedule serves as a guide that helps us form a habit, which can then help us achieve our goals. In this fast paced-world, it’s okay to slow down and take our time to do things in our own pace. Living this way is much more enjoyable but still incredibly rewarding.
