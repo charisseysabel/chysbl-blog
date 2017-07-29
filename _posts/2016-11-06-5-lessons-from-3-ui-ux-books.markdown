@@ -32,7 +32,7 @@ As we go about designing and follow the patterns that others have laid out upon 
 ## Conclusion
 After reading 3+ books, it felt like a new window opened up and all of a sudden I can see the inconsistencies in our app, and I can decide better than when I first started. Before, I thought that good design is a gift that not everyone can have but as I grow, I realize it can be learned. The eyes and the mind can be trained to see what is good design or not.
 
-#### Recommended UI / UX books so far:
+#### The books:
 
 * [Eliminate UX Debt](https://www.uxpin.com/studio/ebooks/eliminate-ux-debt-enterprise-products/) by UXPin
 * [UX Design: the Definitive Beginner's Guide](https://www.uxpin.com/studio/ebooks/ux-design-definitive-beginner-guide/) by UXPin

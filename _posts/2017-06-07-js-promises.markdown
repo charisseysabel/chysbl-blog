@@ -16,7 +16,7 @@ Promises have a `then` method. Therefore, a promise is considered `thenable`.
 
 To understand the benefit of the `then` method, let’s take a step back and see how a typical HTTP request is made *without* a Promise.
 
-Suppose that you want to retrieve 2 sets of data from the server — where the second dataset somewhat relies on the result of the first. You then write 2 async HTTP request you fire /another/ HTTP request from the callback function of the first request.
+Suppose that you want to retrieve 2 sets of data from the server — where the second dataset somewhat relies on the result of the first. You then write 2 async HTTP request you fire *another* HTTP request from the callback function of the first request.
 
 This method can easily go out of hand, which is then referred to as “ [callback hell](http://callbackhell.com/) “ where you invoke callbacks from callbacks from callbacks. Even though there are multiple ways of making it not look too complicated, using the Promise API is much more cleaner and easier to maintain and understand.
 
@@ -31,7 +31,7 @@ Note that those 2 functions are already prepared for you; you just need to use i
 Let’s create function that performs a simple asynchronous HTTP request. We wrap our HTTP request in a new Promise.
 
 {% highlight javascript %}
-function get(url) {
+function getAnimals(url) {
   return new Promise(function(resolve, reject) {
     var xhr = new XMLHttpRequest();
     xhr.open('GET', url, true);
@@ -49,39 +49,37 @@ function get(url) {
 }
 {% endhighlight %}
 
-We call the `resolve` and `reject` functions according to the result of the request.
+Remember when I mentioned that the function arguments -- resolve and reject -- are already prepared for us? Notice how they are being used according to the result of the request.
 
-… screenshot?
-
-Above the `get` function, we assign a GitHub Gist (that returns a json data) to a variable called `pets`:
+Above the `getAnimals` function, we assign a GitHub Gist (that returns a json data) to a variable called `pets`:
 
 {% highlight javascript %}
 var pets = 'https://gist.githubusercontent.com/JulianvBeek/99a950c6711215d41a88d184ab99d75c/raw/d8a4a71e4356e1f163d815b398a6b1984715db87/site.json';
 
-function get(url) { ... }
+function getAnimals(url) { ... }
 {% endhighlight %}
 
-We then call our `get` function, passing the `pets` variable as the argument:
+We then call our `getAnimals` function, passing the `pets` variable as the argument:
 
 {% highlight javascript %}
 var pets = ‘…’;
-function get(url) {…}
+function getAnimals(url) {…}
 
-get(pets);
+getAnimals(pets);
 {% endhighlight %}
 
 Now you may be wondering, what happens once the data has been successfully retrieved from the server? That’s when the `.then` method comes in.
 
-When we call the `get` function for the first time, it returns a new Promise object, which means that we get access to the `.then` method.
+When we call the `getAnimals` function for the first time, it returns a new Promise object, which means that we get access to the `.then` method.
 
 The `.then` method takes a callback function. And inside that function, you can access the data that is returned. To catch any errors, we add the `.catch` method at the end of the chain.
 
 {% highlight javascript %}
-get(housePets)
+getAnimals(pets)
   .then(
   function(data) {
     console.log(data);
-    return get(zooPets);
+    return getAnimals(zoo);
   })
   .catch(function(error) {
     console.log('error!');
@@ -89,16 +87,16 @@ get(housePets)
 {% endhighlight %}
 
 *Okay, that’s cool. But what if we need to call multiple HTTP requests?*
-To perform multiple HTTP requests, we call our `get` function inside the `.then` method’s callback function. Remember how our `get` function returns a new Promise object? That means we’ll have access to another `.then` method, which we can use once the second dataset has been successfully retrieved.
+To perform multiple HTTP requests, we call our `getAnimals` function inside the `.then` method’s callback function. Remember how our `getAnimals` function returns a new Promise object? That means we’ll have access to another `.then` method, which we can use once the second dataset has been successfully retrieved.
 
 {% highlight javascript %}
-get(housePets)
+get(pets)
   .then(
   function(data) {
     console.log(data);
-    return get(zooPets); // call the get() function
+    return get(zoo); // call the get() function
   })
-  .then(function(zooData) { // do something with the second 									data set once it has returned
+  .then(function(zooData) { // do something with the second data set once it has returned
     console.log(zooData);
   })
   .catch(function(error) {
@@ -110,7 +108,6 @@ get(housePets)
 
 ## Support
 Note that Promises are not being supported across all browsers so you have to use polyfills!
-
 
 ## Conclusion
 Promises serve as placeholders for the data you’re retrieving that has not yet returned. It gives us to have access to a `.then` method which allows us to access the data that has been returned. Promises makes asynchronous HTTP request easier to understand and maintain, avoiding what is known as “callback hell”.

@@ -22,7 +22,7 @@ The introduction of asynchronous requests took the web by storm. Things work a l
 
 ## Make a HTTP Request
 
-Now that we've stated the difference and when they are most useful, how exactly do we make a HTTP request? In this quick tutorial, we're gonna request a JSON file from a GitHub Gist synchronously (and asynchronously!) using the XMLHttpRequest method. Note that there are other, more modern ways to make a HTTP request using Javascript but we're gonna go with the most basic one for now.
+Now that we've stated the difference and when they are most useful, how exactly do we make a HTTP request? In this quick tutorial, we're gonna request a JSON file from a GitHub Gist synchronously (and asynchronously!) using the XMLHttpRequest method. Note that there are other, more modern ways to make a HTTP request using plain old Javascript but we're gonna go with the most basic one for now.
 
 {% highlight javascript %}
 //Instantiate a new XMLHttpRequest object

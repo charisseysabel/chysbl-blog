@@ -5,29 +5,24 @@ date:   2017-07-03 09:34:24 +0200
 categories: tutorial
 ---
 
-One of the most important things you have to have in your toolkit these days is the ability to use _Webpack_ — and for a good reason. Webpack is a module bundler. It takes your assets — your JS files, CSS, images, etc — and outputs it as a single file, saving you with tons of trips back and forth from the server.
+One of the most important things you have to have in your toolkit these days is the ability to use [Webpack](https://webpack.js.org/) — and for a good reason. Webpack is a module bundler. It takes your assets — your JS files, CSS, images, etc — and outputs it as a single file, saving you with tons of trips back and forth from the server.
 
 I gotta admit, the first time I’ve set up my own Webpack configuration file, I was pretty stoked and nervous and overwhelmed at the same time. But its important to know that Webpack is just another javascript file. It’s just a configuration file that you set up and run on the command line that will automatically does what you tell it to do. It is incredibly powerful, so its worth investing some time learning it.
-
-These days, its impossible to build the frontend of a scalable application without using some sort of module bundler as a part of the dev environment. And although I like the possibilities and solution brought by module bundlers, I also hate the fact that I always have to set it up first before doing any actual coding 😒
 
 In this post, we’ll set up a basic webpack configuration file.
 
 ## Install Node and NPM
-To get started, we have to install _Node.js_ first. Node.js (or simply called “Node”) is an API that allows you to use Javascript on the server. We need to install it so that we can access _NPM_ (or Node Package Manager). According to the Node.js website, NPM is the largest ecosystem of open source libraries in the world — and that includes Webpack. If you’re pulling your hair out trying to implement a solution for your problem, look around in the npm website; a library might already exist that solves the same problem that you have.
-
+To get started, we have to install [Node.js](https://nodejs.org/en/) first. Node.js (or simply called “Node”) is an API that allows you to use Javascript on the server. We need to install it so that we can access [NPM](https://www.npmjs.com/) (or Node Package Manager). According to the Node.js website, NPM is the largest ecosystem of open source libraries in the world — and that includes Webpack. If you’re pulling your hair out trying to implement a solution for your problem, look around in the npm website; a library might already exist that solves the same problem that you have.
 NPM comes with the Node.js installer but make sure that you have the latest stable version of npm:
 
 `sudo npm install npm@latest -g`
+(You might have to omit “sudo” if you’re using Windows)
 Note: the `-g` flag allows you to install npm “globally”, meaning you don’t need to install it again if you create another project because its readily available in your machine. Omitting the flag only installs it in the local folder where you ran the command.
 
-To check the version that you have, run:
-`npm -v` to check the version of npm and,
-`node -v` to check the version of node that you’re using.
+To check the version of npm that you have, run `npm -v` and, `​node -v` to check the version of node. At the time of this writing, I’m using v5.0.3 of NPM and v8.1.2 of Node.
 
 #### Create your package.json file
-Once you’re in your project folder, run:
-`npm init` -> _link to npm init reference_
+Once you’re in your project folder, run (`npm init`)[https://docs.npmjs.com/cli/init]
 This creates a file called `package.json` for you. It will ask you a bunch of questions about your project but you can just simply skip through them by pressing enter. Alternatively, you can skip the questions entirely by adding the `-y || --yes` flag.
 
 So what exactly is a `package.json` file? Imagine that you want to upload your work on GitHub or you simply want to distribute your app. It doesn’t make sense to upload all your app’s dependencies* on GitHub because that can be a ridiculously huge list and you don’t want other developers to manually install those dependencies themselves. What `package.json` does is that it helps you keep track of your application’s dependencies. You can then upload this single file to GitHub and anyone who wants to run your application locally can just refer to it and run a simple `npm install` to install everything in one go.
@@ -40,13 +35,12 @@ Next we install Webpack:
 `npm install --save-dev webpack`
 Using the `--save-dev` flag allows you to save it in your `package.json` under the devDependencies object.
 
-// Note: if you’re confused about the difference between `--save` and `--save-dev`, read _this_
-
-The very first dependency that you install will always create a `node_modules` folder in your project’s root folder. In this folder, you will find webpack and all the other libraries that it depends on (and its a LOT!). Every other libraries that you install that depends on other libraries (this can go on and on) will be dumped here from now on.
+The very first dependency that you install will always create a node_modules folder in your project’s root folder. In this folder, you will find webpack and all the other libraries that it depends on (and its a LOT!). Every other libraries that you install via NPM will be dumped here from now on.
 
 This is how our folder structure looks like so far:
+
 {% highlight javascript %}
-folder
+root
 |_ index.html
 |_ index.js
 |_ node_modules/
@@ -82,14 +76,16 @@ document.write('Hello World!');
 
 
 ## The 4 concepts of Webpack
-Now that we have Webpack installed, let’s start configuring it! Webpack has four main concepts. We’ll tackle them one by one.
+Now that we have Webpack installed, let’s start configuring it! You can check for the version of webpack that you're using by running npm list webpack on the terminal. At the time of writing, I'm using v2.6.1.
+
+Webpack has four main concepts: Entry, Output, Loaders, and Plugins. We’ll tackle them one by one.
 
 #### Entry
 Start by creating a `webpack.config.js` and write the code below:
 {% highlight javascript %}
 var webpack = require('webpack');
 module.exports = {
-	entry: './path/to/entry/file.js'
+  entry: './path/to/entry/file.js',
 };
 {% endhighlight %}
 
@@ -115,20 +111,15 @@ module.exports = {
 };
 {% endhighlight %}
 
-We first require the `path` module (which is also included in Node) so that it can resolve the file and directory paths for us.
+We first require the [`path`](https://nodejs.org/api/path.html) module (which is also included in Node) so that it can resolve the file and directory paths for us. Then we use its [`resolve`](https://nodejs.org/api/path.html#path_path_resolve_paths) method to process the absolute path. The [`__dirname`](https://nodejs.org/api/globals.html#globals_dirname) returns the directory name of the current module.
 
-We use the _resolve_ method to process the absolute path.
-The `__dirname` returns the directory/folder name of the current module.
-The `filename` property let’s us specify the name of the file of the bundled application.
-
-So in the code below, we say, find the `dist` directory in the current module and add a file called `bundle.js`.
-We don’t have this file and folder created yet, but Webpack can do it for us.
-
+The `filename` property let’s us specify the name of the file of the bundled application.
+So in the code above, we say, find the `dist` directory in the current module and add a file called `bundle.js`. We don’t have this file and folder created yet, but Webpack can do it for us.
 
 #### Loaders
-Next, we define the Loaders. Loaders are the transformations that are applied on your code. Let’s say you use a CSS preprocessor like LESS or SASS. By default, the browser doesn’t understand its syntax, so you need a specific loader that will compile these `.less` or `.scss` files into normal CSS so that the browser can understand it.
+Next, we define the Loaders. Loaders are the transformations that are applied on your code. Let’s say you use a CSS preprocessor like LESS or SASS. By default, the browser doesn’t understand its syntax, so you need a specific loader that will compile these `.less` or `.scss` files into normal CSS so that the browser can understand it.
 
-There are _different loaders available_ and you can install them through NPM:
+There are [different loaders available](https://webpack.js.org/loaders/) and you can install them through NPM as well:
 `npm install --save-dev loader-name`
 
 So, in the example below, we tell webpack that for every `.less` file that it encounters (handled by the regular expression), apply these transformations.
@@ -155,18 +146,17 @@ module.exports = {
 };
 {% endhighlight %}
 
-Note: after some trial and error, I found that the loaders are applied from bottom up. So the less-loader is applied first. You can read about these loaders in the Webpack documentation.
-
+Note: after some trial and error, I found that the loaders are applied from bottom up. So the less-loader is applied first. You can read about these loaders in the [Webpack documentation](https://webpack.js.org/loaders/).
 You can test a variety of other files such as your JS, svg, png, etc files and run a specific loader for each one.
 
 #### Plugins
-According to the __webpack documentation_, plugins are “most commonly used (but not limited to) performing actions and custom functionality on chunks of bundled modules”.
+According to the webpack documentation, plugins are “most commonly used (but not limited to) performing actions and custom functionality on chunks of bundled modules”.
 
-So, in human words: Once you’ve bundled your assets, you can do a lot of other things with those bundled assets.
+To put it simply: Once you’ve bundled your assets, you can do a lot of other things with those bundled assets.
 
-The most common plugin that I use is `HtmlWebpackPlugin` that you can install via npm. This plugin creates an HTML file(s) that can serve your webpack bundles.
+The most common plugin that I use is [`HtmlWebpackPlugin`](https://www.npmjs.com/package/html-webpack-plugin) that you can install via npm. This plugin creates an HTML file(s) that will serve your webpack bundles:
 
-So, `npm install -save-dev html-wepback-plugin`
+`npm install -save-dev html-wepback-plugin`
 
 Plugins, unlike loaders, need to be required at the beginning of the file:
 
@@ -189,10 +179,10 @@ Then, in your `module.exports` object, create a new instance of HtmlWebpackPlugi
   };
 {% endhighlight %}
 
-Here, I specified a configuration object containing a template property inside the new HtmlWebpackPlugin instance. When I run webpack on the command line, HtmlWebpackPlugin takes the template HTML file and creates a new one in the `dist` folder. This new HTML file will contain our bundled assets injected at the end of the `body` tag. Pretty cool.
+Here, I specified a configuration object containing a template property inside the new HtmlWebpackPlugin instance. When I run webpack on the command line, HtmlWebpackPlugin takes the template HTML file and creates a new one in the `dist` folder. This new HTML file will contain our bundled assets injected at the end of the `body` tag.
 
 ## Running Webpack
-There are a couple of ways to run webpack and one of them (and probably the most convenient one) is to add a script in your `package.json` file. We don’t really need the `test` key in the scripts object so we can just replace it.
+There are a couple of ways to run webpack and one of them (and probably the most convenient one) is to add a script in your `package.json` file. We don’t really need the `test` key in the scripts object so we can just replace it.
 
 // package.json
 {% highlight json %}
@@ -203,7 +193,7 @@ There are a couple of ways to run webpack and one of them (and probably the most
 
 Then, in the terminal, run:
 `npm run production`
-This creates a production-ready file for your assets, meaning its all compiled and minified! Yay!
+Then, in the terminal, run `npm run production`. This creates a production-ready file for your assets, meaning its all compiled and minified!
 
 #### Bonus: Webpack Dev Server
 Probably my most favourite part of webpack (so far) is the development server. To put it simply, the webpack development server provides you with a server and live reloading.
@@ -212,23 +202,20 @@ Live reloading is cool because the browser reloads or refreshes the entire app e
 
 
 #### Setting up the dev server
-* Install webpack dev server from npm:
+Install webpack dev server from npm:
 `npm install --save-dev webpack-dev-server`
 
 Then, add another script in your `package.json` file:
 `"start": "webpack-dev-server --open"`
 The `--open` flag lets you automatically open the browser on `http://localhost:8080`
-
-Now, when you run `npm run start`, it should open a browser for you and show you your app!
+Now, when you run `npm run start`, it should open a browser for you and show you a page with the "Hello World" text on it!
 
 
 ## Conclusion
-And there you have it! This setup is pretty basic but there’s already so much you can do with this simple configuration.
+And there you have it! This setup is pretty basic but there’s already so much you can do with this simple configuration. Webpack is a very powerful module bundler and it does tons of other awesome things so I recommend that you check out their documentation, play around and have fun!
 
 #### Where to go from here
-Try fiddling around with Webpack a little more by setting up a configuration for your JS files. For example, if you want to use the _ES6 syntax_, you have to install a couple of loaders from _Babel_ via npm. If you want to use a library or a framework, read their docs on how to get started if you want to use it via npm.
-
-Webpack does tons of other awesome things so I recommend that you check out their documentation, play around and have fun!
+Try fiddling around with Webpack a little more by setting up a configuration for your JS files. For example, if you want to use the [`ES6 syntax`](http://es6-features.org/#Constants), you have to install a couple of loaders from [`Babel`](https://babeljs.io/) via npm. If you want to use a library or a framework, just read their docs; they usually have handy sections on how to get started.
 
 
 

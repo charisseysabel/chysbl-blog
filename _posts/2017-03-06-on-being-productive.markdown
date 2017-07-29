@@ -14,10 +14,10 @@ Most of the time, we have "small" tasks like, grocery shopping, sending an email
 #### Write down specific goals
 I wrote down my long-term and short-term goals. There are no deadlines so I can focus on the steps to achieve it; not on the remaining time left. Some people would prefer to have a deadline because it pushes them to do more or finish early but I think its equally important to just enjoy the the feeling of being in a state of progress.
 
-As an example, one of my short-term goals is to finish Javascript 30. I'm not required to finish it but I would love to finish what I started. A long term goal would be to be able to speak in German. These are both in progress and deadline-free but I try to make sure that I get a little bit further than I did the day before. That's good enough.
+As an example, one of my short-term goals is to finish [Javascript 30](https://javascript30.com/). I'm not required to finish it but I would love to finish what I started. A long term goal would be to be able to speak in German. These are both in progress and deadline-free but I try to make sure that I get a little bit further than I did. That's good enough.
 
 #### Plan for the next day
-Now that I have a specific goal that I want to achieve, I plan for the next day with those goals in mind. The way that it works for me is that I write down 3 goal-related tasks, separated from the extra ones. They are the most important and what I would spend more time on, everything else can be done during breaks between these tasks. I find planning a good way to find order and of course, sometimes things change but that's okay.
+Now that I have a specific goal that I want to achieve, I plan for the next day with those goals in mind. The way that it works for me is that I write down 3 goal-related tasks, separated from the extra ones. They are the most important and what I would spend more time on, everything else can be done during breaks between these tasks. I find planning a good way to find order. Of course, sometimes things change, but that's okay.
 
 ## Conclusion
 
