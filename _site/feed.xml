@@ -1,5 +1,174 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.5.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2017-07-27T22:15:01+02:00</updated><id>http://localhost:4000/</id><title type="html">Charisse Writes</title><subtitle>Hey! I'm Charisse. I'm a web developer and artist living an (almost) zero-waste life in Berlin 🌱
-</subtitle><entry><title type="html">Goals without Deadlines</title><link href="http://localhost:4000/personal-development/2017/07/15/goals-without-deadlines.html" rel="alternate" type="text/html" title="Goals without Deadlines" /><published>2017-07-15T15:00:00+02:00</published><updated>2017-07-15T15:00:00+02:00</updated><id>http://localhost:4000/personal-development/2017/07/15/goals-without-deadlines</id><content type="html" xml:base="http://localhost:4000/personal-development/2017/07/15/goals-without-deadlines.html">&lt;p&gt;Have you ever failed to reach a goal? Like so many other people out there, I too, have set a goal for myself and in one way or another, failed to reach that goal on a set date.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.5.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2017-08-05T13:50:21+02:00</updated><id>http://localhost:4000/</id><title type="html">Charisse Writes</title><subtitle>Hey! I'm Charisse. I'm a web developer and artist living an (almost) zero-waste life in Berlin 🌱
+</subtitle><entry><title type="html">The Grunt Task Runner</title><link href="http://localhost:4000/tutorial/2017/08/05/the-grunt-task-runner.html" rel="alternate" type="text/html" title="The Grunt Task Runner" /><published>2017-08-05T12:00:00+02:00</published><updated>2017-08-05T12:00:00+02:00</updated><id>http://localhost:4000/tutorial/2017/08/05/the-grunt-task-runner</id><content type="html" xml:base="http://localhost:4000/tutorial/2017/08/05/the-grunt-task-runner.html">&lt;p&gt;Task runners are great for automating tasks. Small, repetitive tasks such as minifying, uglifying or even just watching our files for changes can easily take up our time.&lt;/p&gt;
+
+&lt;p&gt;I’ve read some articles online that says automation was once done using shell scripts. I haven’t really tried that myself (but now I’m really curious) but now that frontend technologies have evolved drastically these past few years, task runners like &lt;a href=&quot;https://gulpjs.com/&quot;&gt;Gulp&lt;/a&gt; and &lt;a href=&quot;https://gruntjs.com/&quot;&gt;Grunt&lt;/a&gt; took our frontend environment another step forward.&lt;/p&gt;
+
+&lt;p&gt;In this post, I experimented about the basic Grunt setup and learned how to automate a task like compiling LESS files to normal CSS and watching for file changes. I didn’t really have a special preference whether to use Grunt or Gulp. I haven’t used any of them in any of my projects so I just picked one and moved on.&lt;/p&gt;
+
+&lt;h2 id=&quot;prerequisites&quot;&gt;Prerequisites&lt;/h2&gt;
+
+&lt;p&gt;Before we get started, make sure you have the latest version of Node and NPM. At the time of writing, I am using Node v8.2.1 and NPM v5.3.0. Further in the tutorial, I will assume that you have a npm project installed through &lt;code class=&quot;highlighter-rouge&quot;&gt;npm init&lt;/code&gt;.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;nx&quot;&gt;Folder&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Structure&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;node_modules&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;assets&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
+   &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;less&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Gruntfile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;js&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;package&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;json&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;package&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;lock&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;json&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;installation&quot;&gt;Installation&lt;/h2&gt;
+&lt;p&gt;So the first thing we have to do is install &lt;code class=&quot;highlighter-rouge&quot;&gt;grunt-cli&lt;/code&gt;  globally by running: &lt;code class=&quot;highlighter-rouge&quot;&gt;npm install -g grunt-cli&lt;/code&gt; This will allow us to run the version of Grunt that we will install in our project. The &lt;code class=&quot;highlighter-rouge&quot;&gt;grunt-cli&lt;/code&gt; itself is not the task runner; its only the runner of the task runner :D&lt;/p&gt;
+
+&lt;p&gt;At first I only installed the &lt;code class=&quot;highlighter-rouge&quot;&gt;grunt-cli&lt;/code&gt; locally on my project folder because for trying out new technologies, I really don’t want to have anything installed globally. But for some reason, it doesn’t work when its only installed locally which kinda sucks.&lt;/p&gt;
+
+&lt;p&gt;Next, we install &lt;code class=&quot;highlighter-rouge&quot;&gt;grunt&lt;/code&gt; by running &lt;code class=&quot;highlighter-rouge&quot;&gt;npm install --save-dev grunt&lt;/code&gt;. This will create a &lt;code class=&quot;highlighter-rouge&quot;&gt;node_modules&lt;/code&gt; folder for us.&lt;/p&gt;
+
+&lt;h2 id=&quot;plugins&quot;&gt;Plugins&lt;/h2&gt;
+&lt;p&gt;Grunt by itself does not do anything and chances are, if you need to use a task runner, then you probably have something that you want to automate. For a particular task, we need to install a different library, which Grunt refers to as a Plugin. You can find all the different plugins for Grunt in the &lt;a href=&quot;https://gruntjs.com/plugins&quot;&gt;project’s plugins page&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;As a first example, let’s say we want to use LESS in our code. Obviously we have to compile that into normal CSS so that the browser can understand it.&lt;/p&gt;
+
+&lt;p&gt;So we can go ahead and install the less plugin by running &lt;code class=&quot;highlighter-rouge&quot;&gt;npm install --save-dev grunt-contrib-less&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Here’s an example LESS file that we want to compile:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;o&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;.less&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;@color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;red&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;h1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;gruntfile&quot;&gt;Gruntfile&lt;/h2&gt;
+&lt;p&gt;Create a file called &lt;code class=&quot;highlighter-rouge&quot;&gt;Gruntfile.js&lt;/code&gt; (note the capital G). In this file will live all configurations that we want Grunt to do for us.&lt;/p&gt;
+
+&lt;p&gt;In this file, we want to export a function, passing in an argument called &lt;code class=&quot;highlighter-rouge&quot;&gt;grunt&lt;/code&gt;:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;c1&quot;&gt;// Gruntfile.js&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exports&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;grunt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;There are 3 main methods that we want to access in the &lt;code class=&quot;highlighter-rouge&quot;&gt;grunt&lt;/code&gt; object:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;grunt.initConfig&lt;/code&gt; takes an object that specifies the configuration for each of our desired plugin&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;grunt.loadNpmTasks&lt;/code&gt; take strings indicating the plugin that we want to use&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;grunt.registerTasks&lt;/code&gt; allows you to set the default task for grunt&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Now that I have my LESS plugin installed, I can enable it inside my Gruntfile by calling the &lt;code class=&quot;highlighter-rouge&quot;&gt;loadNpmTasks&lt;/code&gt; method and passing it the name of our plugin:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;c1&quot;&gt;// Gruntfile.js&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exports&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;grunt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;grunt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;loadNpmTasks&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'grunt-contrib-less'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h4 id=&quot;the-less-plugin&quot;&gt;The LESS plugin&lt;/h4&gt;
+&lt;p&gt;Next, we access grunt’s &lt;code class=&quot;highlighter-rouge&quot;&gt;initConfig&lt;/code&gt; method where we pass an object that contains the configuration for the tasks that we want to automate. Note that every plugin might have a different way of configuration so its best to refer to their documentation!&lt;/p&gt;
+
+&lt;p&gt;Here, we specify a &lt;code class=&quot;highlighter-rouge&quot;&gt;development&lt;/code&gt; object for our LESS task:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;c1&quot;&gt;// Gruntfile.js&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exports&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;grunt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;grunt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;initConfig&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;less&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;development&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;paths&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'./assets/main.less'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;files&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'./build/main.css'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'./assets/main.less'&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;grunt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;loadNpmTasks&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'grunt-contrib-less'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;options&lt;/code&gt;  take &lt;code class=&quot;highlighter-rouge&quot;&gt;paths&lt;/code&gt; where we specify an array, a single string, or a function that leads to our source LESS file(s). There are other options that we can add but we’ll keep it simple for this example. Alternatively, you can omit this object entirely if you don’t have additional options; it will work just the same.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;files&lt;/code&gt;  take an object with its key pointing to the resulting CSS file and its value being the path to the source LESS file.&lt;/p&gt;
+
+&lt;p&gt;Now if you run &lt;code class=&quot;highlighter-rouge&quot;&gt;grunt less&lt;/code&gt; on the command line, you will see that our task runner will compile our LESS file and create a &lt;code class=&quot;highlighter-rouge&quot;&gt;build&lt;/code&gt; folder for us, containing our compiled CSS file!&lt;/p&gt;
+
+&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;registerTasks&lt;/code&gt; method allow us to specify what tasks to run if there are no tasks specified, for example if you just type &lt;code class=&quot;highlighter-rouge&quot;&gt;grunt&lt;/code&gt; and not &lt;code class=&quot;highlighter-rouge&quot;&gt;grunt less&lt;/code&gt;. This method takes 2 arguments: an alias (or a name for a task, which is called &lt;code class=&quot;highlighter-rouge&quot;&gt;default&lt;/code&gt; by default) and an array of tasks.&lt;/p&gt;
+
+&lt;p&gt;So in the code below, we could say that we want our LESS files to compile whenever we run &lt;code class=&quot;highlighter-rouge&quot;&gt;grunt&lt;/code&gt; :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;c1&quot;&gt;// Gruntfile.js&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exports&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;grunt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;grunt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;initConfig&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({...});&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;grunt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;loadNpmTasks&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(...);&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;grunt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;registerTask&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'default'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'less'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;So, if you run &lt;code class=&quot;highlighter-rouge&quot;&gt;grunt&lt;/code&gt; on the command line, it will do the same as &lt;code class=&quot;highlighter-rouge&quot;&gt;grunt less&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Once you have configured all the tasks that you want to automate, it would be nice if we don’t have to repeatedly run &lt;code class=&quot;highlighter-rouge&quot;&gt;grunt&lt;/code&gt; everytime we edit / add / delete files. The solution, of course, is to automate the task runner itself!&lt;/p&gt;
+
+&lt;h4 id=&quot;the-watch-plugin&quot;&gt;The Watch plugin&lt;/h4&gt;
+&lt;p&gt;Start by installing &lt;code class=&quot;highlighter-rouge&quot;&gt;grunt-contrib-watch&lt;/code&gt; and save it to your devDependencies.&lt;/p&gt;
+
+&lt;p&gt;Once its installed, enable it inside your Gruntfile by adding another &lt;code class=&quot;highlighter-rouge&quot;&gt;loadNpmTask&lt;/code&gt;  and register it as the default task instead of  &lt;code class=&quot;highlighter-rouge&quot;&gt;less&lt;/code&gt; that we defined earlier.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;c1&quot;&gt;// Gruntfile.js&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exports&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;grunt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;grunt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;initConfig&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({..});&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;grunt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;loadNpmTasks&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'grunt-contrib-watch'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;grunt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;loadNpmTasks&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'grunt-contrib-less'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;grunt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;registerTask&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'default'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'watch'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Just like the previous task, we will configure the &lt;code class=&quot;highlighter-rouge&quot;&gt;watch&lt;/code&gt; task inside the  &lt;code class=&quot;highlighter-rouge&quot;&gt;grunt.initConfig&lt;/code&gt; method:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;c1&quot;&gt;// Gruntfile.js&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;grunt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;initConfig&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;watch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// config for the watch task goes here&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// other tasks&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Inside &lt;code class=&quot;highlighter-rouge&quot;&gt;watch&lt;/code&gt; , we group tasks based on the things we want to watch for, say, the “styles” object for all the styling (it can be named anything you want). We then specify the files we want to watch for inside the &lt;code class=&quot;highlighter-rouge&quot;&gt;files&lt;/code&gt; inside “styles”. In the code below, we are recursively telling Grunt to watch files with a &lt;code class=&quot;highlighter-rouge&quot;&gt;.less&lt;/code&gt; extension in folders and its subfolders.
+Once Grunt sees that our &lt;code class=&quot;highlighter-rouge&quot;&gt;.less&lt;/code&gt; files have changed, its going to run the &lt;code class=&quot;highlighter-rouge&quot;&gt;less&lt;/code&gt; task that we’ve specified before.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;c1&quot;&gt;// inside the watch object&lt;/span&gt;
+&lt;span class=&quot;nl&quot;&gt;watch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;styles&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;files&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'/**/*.less'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;tasks&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'less'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Go ahead and run &lt;code class=&quot;highlighter-rouge&quot;&gt;grunt&lt;/code&gt; and change the &lt;code class=&quot;highlighter-rouge&quot;&gt;main.less&lt;/code&gt; file. Once you hit save, you’ll see that the &lt;code class=&quot;highlighter-rouge&quot;&gt;less&lt;/code&gt; task ran and updated our code! Pretty cool right? :D&lt;/p&gt;
+
+&lt;h2 id=&quot;where-to-go-from-here&quot;&gt;Where to go from here&lt;/h2&gt;
+&lt;p&gt;Here’s the complete code snippet so far:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;c1&quot;&gt;// Gruntfile.js&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exports&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;grunt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;grunt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;initConfig&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;less&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;development&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;paths&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'./assets/main.less'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;files&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'./build/main.css'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'./assets/main.less'&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;watch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;styles&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;files&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'/**/*.less'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;tasks&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'less'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;grunt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;loadNpmTasks&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'grunt-contrib-watch'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;grunt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;loadNpmTasks&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'grunt-contrib-less'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;grunt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;registerTask&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'default'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'watch'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;If you’re working on a modern front end environment, chances are, you’re also dealing with Javascript.&lt;/p&gt;
+
+&lt;p&gt;Find a way to minify and concatenate your files. Look for the right plugin and read their documentation. If you’re stuck, search or ask questions on Stack Overflow. Your first few tries might not work and might leave you frustrated. This is natural and the only way to get past it is to keep going and remember to have fun!&lt;/p&gt;</content><author><name></name></author><summary type="html">Task runners are great for automating tasks. Small, repetitive tasks such as minifying, uglifying or even just watching our files for changes can easily take up our time.</summary></entry><entry><title type="html">Goals without Deadlines</title><link href="http://localhost:4000/personal-development/2017/07/15/goals-without-deadlines.html" rel="alternate" type="text/html" title="Goals without Deadlines" /><published>2017-07-15T15:00:00+02:00</published><updated>2017-07-15T15:00:00+02:00</updated><id>http://localhost:4000/personal-development/2017/07/15/goals-without-deadlines</id><content type="html" xml:base="http://localhost:4000/personal-development/2017/07/15/goals-without-deadlines.html">&lt;p&gt;Have you ever failed to reach a goal? Like so many other people out there, I too, have set a goal for myself and in one way or another, failed to reach that goal on a set date.&lt;/p&gt;
 
 &lt;p&gt;This is a blogpost outlining the talk that I have given at Women Who Code Berlin.&lt;/p&gt;
 
@@ -26,10 +195,10 @@
 &lt;p&gt;Having a schedule keeps me organised. For example, every morning when I get in to work, one of the first things that I do is to figure out what I need to do for that day and list them down. It keeps me from procrastinating because I don’t have to stop and look around for things I need to do because well, I know them ahead of time. Sometimes I even try to figure out what I need to do the night before, and that gives me the mindset of “I have stuff to do” the next morning, which helps me to not linger in bed for too long.&lt;/p&gt;
 
 &lt;h2 id=&quot;how-to-set-a-schedule&quot;&gt;How to Set a Schedule&lt;/h2&gt;
-&lt;h3 id=&quot;plan-ahead&quot;&gt;Plan Ahead&lt;/h3&gt;
+&lt;h4 id=&quot;plan-ahead&quot;&gt;Plan Ahead&lt;/h4&gt;
 &lt;p&gt;The core part of scheduling is figuring out what you need to do ahead of time. I usually sit down and plan stuff out every two weeks. Since I almost always work on multiple goals, I feel 2 weeks is the best time frame for me to finish some tasks compared to monthly or weekly plans. A two-week plan might not work for you, so adjust as you see fit.&lt;/p&gt;
 
-&lt;h3 id=&quot;prioritise&quot;&gt;Prioritise&lt;/h3&gt;
+&lt;h4 id=&quot;prioritise&quot;&gt;Prioritise&lt;/h4&gt;
 &lt;p&gt;Next, I list down all the things I want to do in the next couple of weeks that’s related to my goal. I usually don’t include other activities such as doing groceries, going to work, chores, etc. because I can figure that out in the morning or the night before.&lt;/p&gt;
 
 &lt;p&gt;You want to break down your tasks so that they are small enough but not too small that they become boring and effortless. The reason why we do this is because we want feedback. Knowing that we’re making progress is a good motivation to keep going.&lt;/p&gt;
@@ -38,55 +207,44 @@
 
 &lt;p&gt;I don’t set a fixed time to work on any task because I suck at estimation and quite often some tasks really just take longer than you would’ve expected. So why bother?&lt;/p&gt;
 
-&lt;h3 id=&quot;dont-be-too-hard-on-yourself&quot;&gt;Don’t be too hard on yourself&lt;/h3&gt;
+&lt;h4 id=&quot;dont-be-too-hard-on-yourself&quot;&gt;Don’t be too hard on yourself&lt;/h4&gt;
 &lt;p&gt;Often times, stuff come up in the middle of the week that has to be attended. Other times, you just don’t feel like doing anything. You may have to put off some tasks until next week or you might not be able to do everything that you planned out to do. Or maybe you just have to take a break. And that’s okay. Enjoy where you are in the process but don’t linger around too long because that won’t help you achieve your goal either.&lt;/p&gt;
 
-&lt;h3 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h3&gt;
-&lt;p&gt;The key to achieving our goal is consistency. Having a schedule serves as a guide that helps us form a habit, which can then help us achieve our goals. In this fast paced-world, it’s okay to slow down and take our time to do things in our own pace. Living this way is much more enjoyable but still incredibly rewarding.&lt;/p&gt;</content><author><name></name></author><summary type="html">Have you ever failed to reach a goal? Like so many other people out there, I too, have set a goal for myself and in one way or another, failed to reach that goal on a set date.</summary></entry><entry><title type="html">Up and Running with Webpack</title><link href="http://localhost:4000/tutorial/2017/07/03/up-and-running-with-webpack.html" rel="alternate" type="text/html" title="Up and Running with Webpack" /><published>2017-07-03T09:34:24+02:00</published><updated>2017-07-03T09:34:24+02:00</updated><id>http://localhost:4000/tutorial/2017/07/03/up-and-running-with-webpack</id><content type="html" xml:base="http://localhost:4000/tutorial/2017/07/03/up-and-running-with-webpack.html">&lt;p&gt;One of the most important things you have to have in your toolkit these days is the ability to use &lt;em&gt;Webpack&lt;/em&gt; — and for a good reason. Webpack is a module bundler. It takes your assets — your JS files, CSS, images, etc — and outputs it as a single file, saving you with tons of trips back and forth from the server.&lt;/p&gt;
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;The key to achieving our goal is consistency. Having a schedule serves as a guide that helps us form a habit, which can then help us achieve our goals. In this fast paced-world, it’s okay to slow down and take our time to do things in our own pace. Living this way is much more enjoyable but still incredibly rewarding.&lt;/p&gt;</content><author><name></name></author><summary type="html">Have you ever failed to reach a goal? Like so many other people out there, I too, have set a goal for myself and in one way or another, failed to reach that goal on a set date.</summary></entry><entry><title type="html">Up and Running with Webpack</title><link href="http://localhost:4000/tutorial/2017/07/03/up-and-running-with-webpack.html" rel="alternate" type="text/html" title="Up and Running with Webpack" /><published>2017-07-03T09:34:24+02:00</published><updated>2017-07-03T09:34:24+02:00</updated><id>http://localhost:4000/tutorial/2017/07/03/up-and-running-with-webpack</id><content type="html" xml:base="http://localhost:4000/tutorial/2017/07/03/up-and-running-with-webpack.html">&lt;p&gt;One of the most important things you have to have in your toolkit these days is the ability to use &lt;a href=&quot;https://webpack.js.org/&quot;&gt;Webpack&lt;/a&gt; — and for a good reason. Webpack is a module bundler. It takes your assets — your JS files, CSS, images, etc — and outputs it as a single file, saving you with tons of trips back and forth from the server.&lt;/p&gt;
 
 &lt;p&gt;I gotta admit, the first time I’ve set up my own Webpack configuration file, I was pretty stoked and nervous and overwhelmed at the same time. But its important to know that Webpack is just another javascript file. It’s just a configuration file that you set up and run on the command line that will automatically does what you tell it to do. It is incredibly powerful, so its worth investing some time learning it.&lt;/p&gt;
 
-&lt;p&gt;These days, its impossible to build the frontend of a scalable application without using some sort of module bundler as a part of the dev environment. And although I like the possibilities and solution brought by module bundlers, I also hate the fact that I always have to set it up first before doing any actual coding 😒&lt;/p&gt;
-
 &lt;p&gt;In this post, we’ll set up a basic webpack configuration file.&lt;/p&gt;
 
-&lt;h2 id=&quot;get-started-with-webpack&quot;&gt;Get started with Webpack&lt;/h2&gt;
-&lt;p&gt;&lt;em&gt;Install Node and NPM&lt;/em&gt;&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;what is Node?
-To get started, we have to install &lt;em&gt;Node.js&lt;/em&gt; first. Node.js (or simply called “Node”) is an API that allows you to use Javascript on the server. We need to install it so that we can access &lt;em&gt;NPM&lt;/em&gt; (or Node Package Manager). According to the Node.js website, NPM is the largest ecosystem of open source libraries in the world — and that includes Webpack. If you’re pulling your hair out trying to implement a solution for your problem, look around in the npm website; a library might already exist that solves the same problem that you have.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;NPM comes with the Node.js installer but make sure that you have the latest stable version of npm:&lt;/p&gt;
+&lt;h2 id=&quot;install-node-and-npm&quot;&gt;Install Node and NPM&lt;/h2&gt;
+&lt;p&gt;To get started, we have to install &lt;a href=&quot;https://nodejs.org/en/&quot;&gt;Node.js&lt;/a&gt; first. Node.js (or simply called “Node”) is an API that allows you to use Javascript on the server. We need to install it so that we can access &lt;a href=&quot;https://www.npmjs.com/&quot;&gt;NPM&lt;/a&gt; (or Node Package Manager). According to the Node.js website, NPM is the largest ecosystem of open source libraries in the world — and that includes Webpack. If you’re pulling your hair out trying to implement a solution for your problem, look around in the npm website; a library might already exist that solves the same problem that you have.
+NPM comes with the Node.js installer but make sure that you have the latest stable version of npm:&lt;/p&gt;
 
 &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;sudo npm install npm@latest -g&lt;/code&gt;
+(You might have to omit “sudo” if you’re using Windows)
 Note: the &lt;code class=&quot;highlighter-rouge&quot;&gt;-g&lt;/code&gt; flag allows you to install npm “globally”, meaning you don’t need to install it again if you create another project because its readily available in your machine. Omitting the flag only installs it in the local folder where you ran the command.&lt;/p&gt;
 
-&lt;p&gt;To check the version that you have, run:
-&lt;code class=&quot;highlighter-rouge&quot;&gt;npm -v&lt;/code&gt; to check the version of npm and,
-&lt;code class=&quot;highlighter-rouge&quot;&gt;node -v&lt;/code&gt; to check the version of node that you’re using.&lt;/p&gt;
+&lt;p&gt;To check the version of npm that you have, run &lt;code class=&quot;highlighter-rouge&quot;&gt;npm -v&lt;/code&gt; and, &lt;code class=&quot;highlighter-rouge&quot;&gt;​node -v&lt;/code&gt; to check the version of node. At the time of this writing, I’m using v5.0.3 of NPM and v8.1.2 of Node.&lt;/p&gt;
 
-&lt;p&gt;&lt;em&gt;Creating your package.json file&lt;/em&gt;
-Once you’re in your project folder, run:
-&lt;code class=&quot;highlighter-rouge&quot;&gt;npm init&lt;/code&gt; -&amp;gt; &lt;em&gt;link to npm init reference&lt;/em&gt;
+&lt;h4 id=&quot;create-your-packagejson-file&quot;&gt;Create your package.json file&lt;/h4&gt;
+&lt;p&gt;Once you’re in your project folder, run (&lt;code class=&quot;highlighter-rouge&quot;&gt;npm init&lt;/code&gt;)[https://docs.npmjs.com/cli/init]
 This creates a file called &lt;code class=&quot;highlighter-rouge&quot;&gt;package.json&lt;/code&gt; for you. It will ask you a bunch of questions about your project but you can just simply skip through them by pressing enter. Alternatively, you can skip the questions entirely by adding the &lt;code class=&quot;highlighter-rouge&quot;&gt;-y || --yes&lt;/code&gt; flag.&lt;/p&gt;
 
 &lt;p&gt;So what exactly is a &lt;code class=&quot;highlighter-rouge&quot;&gt;package.json&lt;/code&gt; file? Imagine that you want to upload your work on GitHub or you simply want to distribute your app. It doesn’t make sense to upload all your app’s dependencies* on GitHub because that can be a ridiculously huge list and you don’t want other developers to manually install those dependencies themselves. What &lt;code class=&quot;highlighter-rouge&quot;&gt;package.json&lt;/code&gt; does is that it helps you keep track of your application’s dependencies. You can then upload this single file to GitHub and anyone who wants to run your application locally can just refer to it and run a simple &lt;code class=&quot;highlighter-rouge&quot;&gt;npm install&lt;/code&gt; to install everything in one go.&lt;/p&gt;
 
 &lt;p&gt;*Dependencies are files or libraries that your app “depend” on. Like, it literally can’t run without it. If you used jquery in your code, then you could say that you have jquery as a dependency. Numerous libraries these days depend on other libraries to work properly, so its always nice just to be able to skip the headache of managing those manually.&lt;/p&gt;
 
-&lt;h3 id=&quot;install-webpack&quot;&gt;Install webpack&lt;/h3&gt;
+&lt;h2 id=&quot;install-webpack&quot;&gt;Install webpack&lt;/h2&gt;
 &lt;p&gt;Next we install Webpack:
 &lt;code class=&quot;highlighter-rouge&quot;&gt;npm install --save-dev webpack&lt;/code&gt;
 Using the &lt;code class=&quot;highlighter-rouge&quot;&gt;--save-dev&lt;/code&gt; flag allows you to save it in your &lt;code class=&quot;highlighter-rouge&quot;&gt;package.json&lt;/code&gt; under the devDependencies object.&lt;/p&gt;
 
-&lt;p&gt;// Note: if you’re confused about the difference between &lt;code class=&quot;highlighter-rouge&quot;&gt;--save&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;--save-dev&lt;/code&gt;, read &lt;em&gt;this&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;The very first dependency that you install will always create a &lt;code class=&quot;highlighter-rouge&quot;&gt;node_modules&lt;/code&gt; folder in your project’s root folder. In this folder, you will find webpack and all the other libraries that it depends on (and its a LOT!). Every other libraries that you install that depends on other libraries (this can go on and on) will be dumped here from now on.&lt;/p&gt;
+&lt;p&gt;The very first dependency that you install will always create a node_modules folder in your project’s root folder. In this folder, you will find webpack and all the other libraries that it depends on (and its a LOT!). Every other libraries that you install via NPM will be dumped here from now on.&lt;/p&gt;
 
 &lt;p&gt;This is how our folder structure looks like so far:&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;nx&quot;&gt;folder&lt;/span&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;nx&quot;&gt;root&lt;/span&gt;
 &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;html&lt;/span&gt;
 &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;js&lt;/span&gt;
 &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;node_modules&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
@@ -115,15 +273,17 @@ Using the &lt;code class=&quot;highlighter-rouge&quot;&gt;--save-dev&lt;/code&gt
 &lt;span class=&quot;nt&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;
 &lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;h3 id=&quot;the-4-concepts-of-webpack&quot;&gt;The 4 concepts of Webpack&lt;/h3&gt;
-&lt;p&gt;Now that we have Webpack installed, let’s start configuring it! Webpack has four main concepts. We’ll tackle them one by one.&lt;/p&gt;
+&lt;h2 id=&quot;the-4-concepts-of-webpack&quot;&gt;The 4 concepts of Webpack&lt;/h2&gt;
+&lt;p&gt;Now that we have Webpack installed, let’s start configuring it! You can check for the version of webpack that you’re using by running npm list webpack on the terminal. At the time of writing, I’m using v2.6.1.&lt;/p&gt;
 
-&lt;h3 id=&quot;entry&quot;&gt;Entry&lt;/h3&gt;
+&lt;p&gt;Webpack has four main concepts: Entry, Output, Loaders, and Plugins. We’ll tackle them one by one.&lt;/p&gt;
+
+&lt;h4 id=&quot;entry&quot;&gt;Entry&lt;/h4&gt;
 &lt;p&gt;Start by creating a &lt;code class=&quot;highlighter-rouge&quot;&gt;webpack.config.js&lt;/code&gt; and write the code below:&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;webpack&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'webpack'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 &lt;span class=&quot;nx&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exports&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;na&quot;&gt;entry&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'./path/to/entry/file.js'&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;entry&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'./path/to/entry/file.js'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;require&lt;/code&gt; function and the &lt;code class=&quot;highlighter-rouge&quot;&gt;module&lt;/code&gt; object comes with Node and is a part of the CommonJS API:&lt;/p&gt;
@@ -135,7 +295,7 @@ Using the &lt;code class=&quot;highlighter-rouge&quot;&gt;--save-dev&lt;/code&gt
 
 &lt;p&gt;In order for Webpack to work, we need to specify an entry point. Usually its the root &lt;code class=&quot;highlighter-rouge&quot;&gt;index.js&lt;/code&gt; file but it can be whatever filename in whatever directory you like.&lt;/p&gt;
 
-&lt;h3 id=&quot;output&quot;&gt;Output&lt;/h3&gt;
+&lt;h4 id=&quot;output&quot;&gt;Output&lt;/h4&gt;
 &lt;p&gt;Whenever we tell Webpack to bundle our assets, it also needs to know where the bundled application should live. For that, we need to specify an output property inside the &lt;code class=&quot;highlighter-rouge&quot;&gt;module.exports&lt;/code&gt; object.&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;webpack&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'webpack'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
@@ -148,19 +308,15 @@ Using the &lt;code class=&quot;highlighter-rouge&quot;&gt;--save-dev&lt;/code&gt
 	&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;p&gt;We first require the &lt;code class=&quot;highlighter-rouge&quot;&gt;path&lt;/code&gt; module (which is also included in Node) so that it can resolve the file and directory paths for us.&lt;/p&gt;
+&lt;p&gt;We first require the &lt;a href=&quot;https://nodejs.org/api/path.html&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;path&lt;/code&gt;&lt;/a&gt; module (which is also included in Node) so that it can resolve the file and directory paths for us. Then we use its &lt;a href=&quot;https://nodejs.org/api/path.html#path_path_resolve_paths&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;resolve&lt;/code&gt;&lt;/a&gt; method to process the absolute path. The &lt;a href=&quot;https://nodejs.org/api/globals.html#globals_dirname&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;__dirname&lt;/code&gt;&lt;/a&gt; returns the directory name of the current module.&lt;/p&gt;
 
-&lt;p&gt;We use the &lt;em&gt;resolve&lt;/em&gt; method to process the absolute path.
-The &lt;code class=&quot;highlighter-rouge&quot;&gt;__dirname&lt;/code&gt; returns the directory/folder name of the current module.
-The &lt;code class=&quot;highlighter-rouge&quot;&gt;filename&lt;/code&gt; property let’s us specify the name of the file of the bundled application.&lt;/p&gt;
+&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;filename&lt;/code&gt; property let’s us specify the name of the file of the bundled application.
+So in the code above, we say, find the &lt;code class=&quot;highlighter-rouge&quot;&gt;dist&lt;/code&gt; directory in the current module and add a file called &lt;code class=&quot;highlighter-rouge&quot;&gt;bundle.js&lt;/code&gt;. We don’t have this file and folder created yet, but Webpack can do it for us.&lt;/p&gt;
 
-&lt;p&gt;So in the code below, we say, find the &lt;code class=&quot;highlighter-rouge&quot;&gt;dist&lt;/code&gt; directory in the current module and add a file called &lt;code class=&quot;highlighter-rouge&quot;&gt;bundle.js&lt;/code&gt;.
-We don’t have this file and folder created yet, but Webpack can do it for us.&lt;/p&gt;
+&lt;h4 id=&quot;loaders&quot;&gt;Loaders&lt;/h4&gt;
+&lt;p&gt;Next, we define the Loaders. Loaders are the transformations that are applied on your code. Let’s say you use a CSS preprocessor like LESS or SASS. By default, the browser doesn’t understand its syntax, so you need a specific loader that will compile these &lt;code class=&quot;highlighter-rouge&quot;&gt;.less&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;.scss&lt;/code&gt; files into normal CSS so that the browser can understand it.&lt;/p&gt;
 
-&lt;h3 id=&quot;loaders&quot;&gt;Loaders&lt;/h3&gt;
-&lt;p&gt;Next, we define the Loaders. Loaders are the transformations that are applied on your code. Let’s say you use a CSS preprocessor like LESS or SASS. By default, the browser doesn’t understand its syntax, so you need a specific loader that will compile these &lt;code class=&quot;highlighter-rouge&quot;&gt;.less&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;.scss&lt;/code&gt; files into normal CSS so that the browser can understand it.&lt;/p&gt;
-
-&lt;p&gt;There are &lt;em&gt;different loaders available&lt;/em&gt; and you can install them through NPM:
+&lt;p&gt;There are &lt;a href=&quot;https://webpack.js.org/loaders/&quot;&gt;different loaders available&lt;/a&gt; and you can install them through NPM as well:
 &lt;code class=&quot;highlighter-rouge&quot;&gt;npm install --save-dev loader-name&lt;/code&gt;&lt;/p&gt;
 
 &lt;p&gt;So, in the example below, we tell webpack that for every &lt;code class=&quot;highlighter-rouge&quot;&gt;.less&lt;/code&gt; file that it encounters (handled by the regular expression), apply these transformations.&lt;/p&gt;
@@ -186,18 +342,17 @@ We don’t have this file and folder created yet, but Webpack can do it for us.&
   &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;p&gt;Note: after some trial and error, I found that the loaders are applied from bottom up. So the less-loader is applied first. You can read about these loaders in the Webpack documentation.&lt;/p&gt;
+&lt;p&gt;Note: after some trial and error, I found that the loaders are applied from bottom up. So the less-loader is applied first. You can read about these loaders in the &lt;a href=&quot;https://webpack.js.org/loaders/&quot;&gt;Webpack documentation&lt;/a&gt;.
+You can test a variety of other files such as your JS, svg, png, etc files and run a specific loader for each one.&lt;/p&gt;
 
-&lt;p&gt;You can test a variety of other files such as your JS, svg, png, etc files and run a specific loader for each one.&lt;/p&gt;
+&lt;h4 id=&quot;plugins&quot;&gt;Plugins&lt;/h4&gt;
+&lt;p&gt;According to the webpack documentation, plugins are “most commonly used (but not limited to) performing actions and custom functionality on chunks of bundled modules”.&lt;/p&gt;
 
-&lt;h3 id=&quot;plugins&quot;&gt;Plugins&lt;/h3&gt;
-&lt;p&gt;According to the &lt;em&gt;_webpack documentation&lt;/em&gt;, plugins are “most commonly used (but not limited to) performing actions and custom functionality on chunks of bundled modules”.&lt;/p&gt;
+&lt;p&gt;To put it simply: Once you’ve bundled your assets, you can do a lot of other things with those bundled assets.&lt;/p&gt;
 
-&lt;p&gt;So, in human words: Once you’ve bundled your assets, you can do a lot of other things with those bundled assets.&lt;/p&gt;
+&lt;p&gt;The most common plugin that I use is &lt;a href=&quot;https://www.npmjs.com/package/html-webpack-plugin&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;HtmlWebpackPlugin&lt;/code&gt;&lt;/a&gt; that you can install via npm. This plugin creates an HTML file(s) that will serve your webpack bundles:&lt;/p&gt;
 
-&lt;p&gt;The most common plugin that I use is &lt;code class=&quot;highlighter-rouge&quot;&gt;HtmlWebpackPlugin&lt;/code&gt; that you can install via npm. This plugin creates an HTML file(s) that can serve your webpack bundles.&lt;/p&gt;
-
-&lt;p&gt;So, &lt;code class=&quot;highlighter-rouge&quot;&gt;npm install -save-dev html-wepback-plugin&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;npm install -save-dev html-wepback-plugin&lt;/code&gt;&lt;/p&gt;
 
 &lt;p&gt;Plugins, unlike loaders, need to be required at the beginning of the file:&lt;/p&gt;
 
@@ -217,10 +372,10 @@ We don’t have this file and folder created yet, but Webpack can do it for us.&
     &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
   &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;p&gt;Here, I specified a configuration object containing a template property inside the new HtmlWebpackPlugin instance. When I run webpack on the command line, HtmlWebpackPlugin takes the template HTML file and creates a new one in the &lt;code class=&quot;highlighter-rouge&quot;&gt;dist&lt;/code&gt; folder. This new HTML file will contain our bundled assets injected at the end of the &lt;code class=&quot;highlighter-rouge&quot;&gt;body&lt;/code&gt; tag. Pretty cool.&lt;/p&gt;
+&lt;p&gt;Here, I specified a configuration object containing a template property inside the new HtmlWebpackPlugin instance. When I run webpack on the command line, HtmlWebpackPlugin takes the template HTML file and creates a new one in the &lt;code class=&quot;highlighter-rouge&quot;&gt;dist&lt;/code&gt; folder. This new HTML file will contain our bundled assets injected at the end of the &lt;code class=&quot;highlighter-rouge&quot;&gt;body&lt;/code&gt; tag.&lt;/p&gt;
 
-&lt;h3 id=&quot;running-webpack&quot;&gt;Running Webpack&lt;/h3&gt;
-&lt;p&gt;There are a couple of ways to run webpack and one of them (and probably the most convenient one) is to add a script in your &lt;code class=&quot;highlighter-rouge&quot;&gt;package.json&lt;/code&gt; file. We don’t really need the &lt;code class=&quot;highlighter-rouge&quot;&gt;test&lt;/code&gt; key in the scripts object so we can just replace it.&lt;/p&gt;
+&lt;h2 id=&quot;running-webpack&quot;&gt;Running Webpack&lt;/h2&gt;
+&lt;p&gt;There are a couple of ways to run webpack and one of them (and probably the most convenient one) is to add a script in your &lt;code class=&quot;highlighter-rouge&quot;&gt;package.json&lt;/code&gt; file. We don’t really need the &lt;code class=&quot;highlighter-rouge&quot;&gt;test&lt;/code&gt; key in the scripts object so we can just replace it.&lt;/p&gt;
 
 &lt;p&gt;// package.json&lt;/p&gt;
 
@@ -230,34 +385,29 @@ We don’t have this file and folder created yet, but Webpack can do it for us.&
 
 &lt;p&gt;Then, in the terminal, run:
 &lt;code class=&quot;highlighter-rouge&quot;&gt;npm run production&lt;/code&gt;
-This creates a production-ready file for your assets, meaning its all compiled and minified! Yay!&lt;/p&gt;
+Then, in the terminal, run &lt;code class=&quot;highlighter-rouge&quot;&gt;npm run production&lt;/code&gt;. This creates a production-ready file for your assets, meaning its all compiled and minified!&lt;/p&gt;
 
-&lt;h2 id=&quot;bonus-webpack-dev-server&quot;&gt;Bonus: Webpack Dev Server&lt;/h2&gt;
+&lt;h4 id=&quot;bonus-webpack-dev-server&quot;&gt;Bonus: Webpack Dev Server&lt;/h4&gt;
 &lt;p&gt;Probably my most favourite part of webpack (so far) is the development server. To put it simply, the webpack development server provides you with a server and live reloading.&lt;/p&gt;
 
 &lt;p&gt;Live reloading is cool because the browser reloads or refreshes the entire app every time a file changes. You don’t have to manually do it yourself!&lt;/p&gt;
 
-&lt;h3 id=&quot;setting-up-the-dev-server&quot;&gt;Setting up the dev server&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Install webpack dev server from npm:
-&lt;code class=&quot;highlighter-rouge&quot;&gt;npm install --save-dev webpack-dev-server&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
+&lt;h4 id=&quot;setting-up-the-dev-server&quot;&gt;Setting up the dev server&lt;/h4&gt;
+&lt;p&gt;Install webpack dev server from npm:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;npm install --save-dev webpack-dev-server&lt;/code&gt;&lt;/p&gt;
 
 &lt;p&gt;Then, add another script in your &lt;code class=&quot;highlighter-rouge&quot;&gt;package.json&lt;/code&gt; file:
 &lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;start&quot;: &quot;webpack-dev-server --open&quot;&lt;/code&gt;
-The &lt;code class=&quot;highlighter-rouge&quot;&gt;--open&lt;/code&gt; flag lets you automatically open the browser on &lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:8080&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;Now, when you run &lt;code class=&quot;highlighter-rouge&quot;&gt;npm run start&lt;/code&gt;, it should open a browser for you and show you your app!&lt;/p&gt;
+The &lt;code class=&quot;highlighter-rouge&quot;&gt;--open&lt;/code&gt; flag lets you automatically open the browser on &lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:8080&lt;/code&gt;
+Now, when you run &lt;code class=&quot;highlighter-rouge&quot;&gt;npm run start&lt;/code&gt;, it should open a browser for you and show you a page with the “Hello World” text on it!&lt;/p&gt;
 
 &lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;And there you have it! This setup is pretty basic but there’s already so much you can do with this simple configuration.&lt;/p&gt;
+&lt;p&gt;And there you have it! This setup is pretty basic but there’s already so much you can do with this simple configuration. Webpack is a very powerful module bundler and it does tons of other awesome things so I recommend that you check out their documentation, play around and have fun!&lt;/p&gt;
 
-&lt;h2 id=&quot;where-to-go-from-here&quot;&gt;Where to go from here&lt;/h2&gt;
-&lt;p&gt;Try fiddling around with Webpack a little more by setting up a configuration for your JS files. For example, if you want to use the &lt;em&gt;ES6 syntax&lt;/em&gt;, you have to install a couple of loaders from &lt;em&gt;Babel&lt;/em&gt; via npm. If you want to use a library or a framework, read their docs on how to get started if you want to use it via npm.&lt;/p&gt;
+&lt;h4 id=&quot;where-to-go-from-here&quot;&gt;Where to go from here&lt;/h4&gt;
+&lt;p&gt;Try fiddling around with Webpack a little more by setting up a configuration for your JS files. For example, if you want to use the &lt;a href=&quot;http://es6-features.org/#Constants&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;ES6 syntax&lt;/code&gt;&lt;/a&gt;, you have to install a couple of loaders from &lt;a href=&quot;https://babeljs.io/&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Babel&lt;/code&gt;&lt;/a&gt; via npm. If you want to use a library or a framework, just read their docs; they usually have handy sections on how to get started.&lt;/p&gt;</content><author><name></name></author><summary type="html">One of the most important things you have to have in your toolkit these days is the ability to use Webpack — and for a good reason. Webpack is a module bundler. It takes your assets — your JS files, CSS, images, etc — and outputs it as a single file, saving you with tons of trips back and forth from the server.</summary></entry><entry><title type="html">JS Promises</title><link href="http://localhost:4000/tutorial/2017/06/07/js-promises.html" rel="alternate" type="text/html" title="JS Promises" /><published>2017-06-07T09:34:24+02:00</published><updated>2017-06-07T09:34:24+02:00</updated><id>http://localhost:4000/tutorial/2017/06/07/js-promises</id><content type="html" xml:base="http://localhost:4000/tutorial/2017/06/07/js-promises.html">&lt;p&gt;In the previous post, we used the XMLHttpRequest object which is a very simple and basic way of requesting data from the server. Recently, the ECMAScript 6 introduced a new API called Promises in the hopes of making asynchronous requests more pleasant. We’re gonna take a look at what Promises are and understand them through a little bit of an exercise.&lt;/p&gt;
 
-&lt;p&gt;Webpack does tons of other awesome things so I recommend that you check out their documentation, play around and have fun!&lt;/p&gt;</content><author><name></name></author><summary type="html">One of the most important things you have to have in your toolkit these days is the ability to use Webpack — and for a good reason. Webpack is a module bundler. It takes your assets — your JS files, CSS, images, etc — and outputs it as a single file, saving you with tons of trips back and forth from the server.</summary></entry><entry><title type="html">JS Promises</title><link href="http://localhost:4000/tutorial/2017/06/07/js-promises.html" rel="alternate" type="text/html" title="JS Promises" /><published>2017-06-07T09:34:24+02:00</published><updated>2017-06-07T09:34:24+02:00</updated><id>http://localhost:4000/tutorial/2017/06/07/js-promises</id><content type="html" xml:base="http://localhost:4000/tutorial/2017/06/07/js-promises.html">&lt;p&gt;In the previous post, we used the XMLHttpRequest object which is a very simple and basic way of requesting data from the server. Recently, the ECMAScript 6 introduced a new API called Promises in the hopes of making asynchronous requests more pleasant. We’re gonna take a look at what Promises are and understand them through a little bit of an exercise.&lt;/p&gt;
-
-&lt;h3 id=&quot;what-are-promises&quot;&gt;What are Promises?&lt;/h3&gt;
+&lt;h2 id=&quot;what-are-promises&quot;&gt;What are Promises?&lt;/h2&gt;
 &lt;p&gt;I have to admit that when I first heard someone say, “It returns a Promise”, I immediately go blank. What do you mean by “Promise”?&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;In all simplicity, Promises are just objects.&lt;/em&gt; They serve as placeholders for the data you’re retrieving that has not yet returned. A Promise object immediately returns even before the HTTP Request has been resolved.&lt;/p&gt;
@@ -266,11 +416,11 @@ The &lt;code class=&quot;highlighter-rouge&quot;&gt;--open&lt;/code&gt; flag let
 
 &lt;p&gt;To understand the benefit of the &lt;code class=&quot;highlighter-rouge&quot;&gt;then&lt;/code&gt; method, let’s take a step back and see how a typical HTTP request is made &lt;em&gt;without&lt;/em&gt; a Promise.&lt;/p&gt;
 
-&lt;p&gt;Suppose that you want to retrieve 2 sets of data from the server — where the second dataset somewhat relies on the result of the first. You then write 2 async HTTP request you fire /another/ HTTP request from the callback function of the first request.&lt;/p&gt;
+&lt;p&gt;Suppose that you want to retrieve 2 sets of data from the server — where the second dataset somewhat relies on the result of the first. You then write 2 async HTTP request you fire &lt;em&gt;another&lt;/em&gt; HTTP request from the callback function of the first request.&lt;/p&gt;
 
 &lt;p&gt;This method can easily go out of hand, which is then referred to as “ &lt;a href=&quot;http://callbackhell.com/&quot;&gt;callback hell&lt;/a&gt; “ where you invoke callbacks from callbacks from callbacks. Even though there are multiple ways of making it not look too complicated, using the Promise API is much more cleaner and easier to maintain and understand.&lt;/p&gt;
 
-&lt;h3 id=&quot;how-does-a-promise-work&quot;&gt;How does a Promise work?&lt;/h3&gt;
+&lt;h2 id=&quot;how-does-a-promise-work&quot;&gt;How does a Promise work?&lt;/h2&gt;
 &lt;p&gt;A Promise takes a function as a callback. That function takes two arguments:&lt;/p&gt;
 
 &lt;ul&gt;
@@ -282,7 +432,7 @@ The &lt;code class=&quot;highlighter-rouge&quot;&gt;--open&lt;/code&gt; flag let
 
 &lt;p&gt;Let’s create function that performs a simple asynchronous HTTP request. We wrap our HTTP request in a new Promise.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;getAnimals&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
   &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Promise&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;resolve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;reject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;xhr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;XMLHttpRequest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
     &lt;span class=&quot;nx&quot;&gt;xhr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;open&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'GET'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
@@ -299,49 +449,47 @@ The &lt;code class=&quot;highlighter-rouge&quot;&gt;--open&lt;/code&gt; flag let
   &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;p&gt;We call the &lt;code class=&quot;highlighter-rouge&quot;&gt;resolve&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;reject&lt;/code&gt; functions according to the result of the request.&lt;/p&gt;
+&lt;p&gt;Remember when I mentioned that the function arguments – resolve and reject – are already prepared for us? Notice how they are being used according to the result of the request.&lt;/p&gt;
 
-&lt;p&gt;… screenshot?&lt;/p&gt;
-
-&lt;p&gt;Above the &lt;code class=&quot;highlighter-rouge&quot;&gt;get&lt;/code&gt; function, we assign a GitHub Gist (that returns a json data) to a variable called &lt;code class=&quot;highlighter-rouge&quot;&gt;pets&lt;/code&gt;:&lt;/p&gt;
+&lt;p&gt;Above the &lt;code class=&quot;highlighter-rouge&quot;&gt;getAnimals&lt;/code&gt; function, we assign a GitHub Gist (that returns a json data) to a variable called &lt;code class=&quot;highlighter-rouge&quot;&gt;pets&lt;/code&gt;:&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;pets&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'https://gist.githubusercontent.com/JulianvBeek/99a950c6711215d41a88d184ab99d75c/raw/d8a4a71e4356e1f163d815b398a6b1984715db87/site.json'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 
-&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;getAnimals&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;p&gt;We then call our &lt;code class=&quot;highlighter-rouge&quot;&gt;get&lt;/code&gt; function, passing the &lt;code class=&quot;highlighter-rouge&quot;&gt;pets&lt;/code&gt; variable as the argument:&lt;/p&gt;
+&lt;p&gt;We then call our &lt;code class=&quot;highlighter-rouge&quot;&gt;getAnimals&lt;/code&gt; function, passing the &lt;code class=&quot;highlighter-rouge&quot;&gt;pets&lt;/code&gt; variable as the argument:&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;pets&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;‘…’&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;…&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;getAnimals&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;…&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
-&lt;span class=&quot;nx&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;pets&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;span class=&quot;nx&quot;&gt;getAnimals&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;pets&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;Now you may be wondering, what happens once the data has been successfully retrieved from the server? That’s when the &lt;code class=&quot;highlighter-rouge&quot;&gt;.then&lt;/code&gt; method comes in.&lt;/p&gt;
 
-&lt;p&gt;When we call the &lt;code class=&quot;highlighter-rouge&quot;&gt;get&lt;/code&gt; function for the first time, it returns a new Promise object, which means that we get access to the &lt;code class=&quot;highlighter-rouge&quot;&gt;.then&lt;/code&gt; method.&lt;/p&gt;
+&lt;p&gt;When we call the &lt;code class=&quot;highlighter-rouge&quot;&gt;getAnimals&lt;/code&gt; function for the first time, it returns a new Promise object, which means that we get access to the &lt;code class=&quot;highlighter-rouge&quot;&gt;.then&lt;/code&gt; method.&lt;/p&gt;
 
 &lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;.then&lt;/code&gt; method takes a callback function. And inside that function, you can access the data that is returned. To catch any errors, we add the &lt;code class=&quot;highlighter-rouge&quot;&gt;.catch&lt;/code&gt; method at the end of the chain.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;nx&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;housePets&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;nx&quot;&gt;getAnimals&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;pets&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
   &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;then&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
   &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;zooPets&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;getAnimals&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;zoo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
   &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
   &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'error!'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;&lt;em&gt;Okay, that’s cool. But what if we need to call multiple HTTP requests?&lt;/em&gt;
-To perform multiple HTTP requests, we call our &lt;code class=&quot;highlighter-rouge&quot;&gt;get&lt;/code&gt; function inside the &lt;code class=&quot;highlighter-rouge&quot;&gt;.then&lt;/code&gt; method’s callback function. Remember how our &lt;code class=&quot;highlighter-rouge&quot;&gt;get&lt;/code&gt; function returns a new Promise object? That means we’ll have access to another &lt;code class=&quot;highlighter-rouge&quot;&gt;.then&lt;/code&gt; method, which we can use once the second dataset has been successfully retrieved.&lt;/p&gt;
+To perform multiple HTTP requests, we call our &lt;code class=&quot;highlighter-rouge&quot;&gt;getAnimals&lt;/code&gt; function inside the &lt;code class=&quot;highlighter-rouge&quot;&gt;.then&lt;/code&gt; method’s callback function. Remember how our &lt;code class=&quot;highlighter-rouge&quot;&gt;getAnimals&lt;/code&gt; function returns a new Promise object? That means we’ll have access to another &lt;code class=&quot;highlighter-rouge&quot;&gt;.then&lt;/code&gt; method, which we can use once the second dataset has been successfully retrieved.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;nx&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;housePets&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;nx&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;pets&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
   &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;then&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
   &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;zooPets&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// call the get() function&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;zoo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// call the get() function&lt;/span&gt;
   &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;then&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;zooData&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// do something with the second 									data set once it has returned&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;then&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;zooData&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// do something with the second data set once it has returned&lt;/span&gt;
     &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;zooData&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
   &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
   &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
@@ -352,10 +500,10 @@ To perform multiple HTTP requests, we call our &lt;code class=&quot;highlighter-
   &lt;p&gt;You could compare the Promise API to the step by step of making a burger. First, you run off to get the bottom bun (initial request). When I have my bottom bun, I can THEN put in the lettuce, THEN the patty, THEN some cheese, THEN tomatoes, and so on. If, for some reason I am missing a bottom bun, I have to return to the customer and tell them that we can’t make burgers anymore (stating the error)&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;h3 id=&quot;support&quot;&gt;Support&lt;/h3&gt;
+&lt;h2 id=&quot;support&quot;&gt;Support&lt;/h2&gt;
 &lt;p&gt;Note that Promises are not being supported across all browsers so you have to use polyfills!&lt;/p&gt;
 
-&lt;h3 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h3&gt;
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
 &lt;p&gt;Promises serve as placeholders for the data you’re retrieving that has not yet returned. It gives us to have access to a &lt;code class=&quot;highlighter-rouge&quot;&gt;.then&lt;/code&gt; method which allows us to access the data that has been returned. Promises makes asynchronous HTTP request easier to understand and maintain, avoiding what is known as “callback hell”.&lt;/p&gt;</content><author><name></name></author><summary type="html">In the previous post, we used the XMLHttpRequest object which is a very simple and basic way of requesting data from the server. Recently, the ECMAScript 6 introduced a new API called Promises in the hopes of making asynchronous requests more pleasant. We’re gonna take a look at what Promises are and understand them through a little bit of an exercise.</summary></entry><entry><title type="html">Synchronous and Asynchronous Requests in Javascript</title><link href="http://localhost:4000/tutorial/2017/05/07/sync-and-async-requests.html" rel="alternate" type="text/html" title="Synchronous and Asynchronous Requests in Javascript" /><published>2017-05-07T09:34:24+02:00</published><updated>2017-05-07T09:34:24+02:00</updated><id>http://localhost:4000/tutorial/2017/05/07/sync-and-async-requests</id><content type="html" xml:base="http://localhost:4000/tutorial/2017/05/07/sync-and-async-requests.html">&lt;p&gt;There are 2 types of requests that can Javascript can make: Synchronous and Asynchronous. But what is the difference between the two? And how do you make such requests?&lt;/p&gt;
 
 &lt;p&gt;The difference between synchronous and asynchronous requests can be best explained by &lt;a href=&quot;http://stackoverflow.com/questions/748175/asynchronous-vs-synchronous-execution-what-does-it-really-mean&quot;&gt;one of the comments from Stack Overflow&lt;/a&gt;:&lt;/p&gt;
@@ -373,16 +521,16 @@ Requesting data synchronously used to be the default way on how the browser work
 
 &lt;p&gt;The introduction of asynchronous requests took the web by storm. Things work a little differently when you request data asynchronously. Asynchronous requests allows you to move on to another task before the previous one ever finishes. This functionality was given the term AJAX, or Asynchronous JavaScript and XML. So whenever you hear the term AJAX it basically means that they are handling data asynchronously.&lt;/p&gt;
 
-&lt;h3 id=&quot;make-a-http-request&quot;&gt;Make a HTTP Request&lt;/h3&gt;
+&lt;h2 id=&quot;make-a-http-request&quot;&gt;Make a HTTP Request&lt;/h2&gt;
 
-&lt;p&gt;Now that we’ve stated the difference and when they are most useful, how exactly do we make a HTTP request? In this quick tutorial, we’re gonna request a JSON file from a GitHub Gist synchronously (and asynchronously!) using the XMLHttpRequest method. Note that there are other, more modern ways to make a HTTP request using Javascript but we’re gonna go with the most basic one for now.&lt;/p&gt;
+&lt;p&gt;Now that we’ve stated the difference and when they are most useful, how exactly do we make a HTTP request? In this quick tutorial, we’re gonna request a JSON file from a GitHub Gist synchronously (and asynchronously!) using the XMLHttpRequest method. Note that there are other, more modern ways to make a HTTP request using plain old Javascript but we’re gonna go with the most basic one for now.&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;c1&quot;&gt;//Instantiate a new XMLHttpRequest object&lt;/span&gt;
 &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;xhr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;XMLHttpRequest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;If you log this variable in the console, you can see all the methods that are now available for us to use.&lt;/p&gt;
 
-&lt;h3 id=&quot;initialise-a-request&quot;&gt;Initialise a request&lt;/h3&gt;
+&lt;h4 id=&quot;initialise-a-request&quot;&gt;Initialise a request&lt;/h4&gt;
 
 &lt;p&gt;The next step is to initialise a request using the &lt;code class=&quot;highlighter-rouge&quot;&gt;.open()&lt;/code&gt; method. The &lt;code class=&quot;highlighter-rouge&quot;&gt;.open()&lt;/code&gt; method takes 5 arguments, 3 of which are optional:&lt;/p&gt;
 
@@ -397,7 +545,7 @@ Requesting data synchronously used to be the default way on how the browser work
 
 &lt;p&gt;Okay, our script now runs off to Serverland and fetches the data for us. Since we requested the data asynchronously, we can do other tasks instead of waiting for the response to return. But how do we know when the response has actually returned?&lt;/p&gt;
 
-&lt;h3 id=&quot;listening-for-an-event&quot;&gt;Listening for an event&lt;/h3&gt;
+&lt;h4 id=&quot;listening-for-an-event&quot;&gt;Listening for an event&lt;/h4&gt;
 
 &lt;p&gt;Once we’ve sent a request to the server, we have to find out if the response has returned or if the request has failed. We do this by listening for a change in the &lt;code class=&quot;highlighter-rouge&quot;&gt;readyState()&lt;/code&gt; method.&lt;/p&gt;
 
@@ -415,7 +563,7 @@ Requesting data synchronously used to be the default way on how the browser work
   &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;h3 id=&quot;process-the-data&quot;&gt;Process the data&lt;/h3&gt;
+&lt;h4 id=&quot;process-the-data&quot;&gt;Process the data&lt;/h4&gt;
 
 &lt;p&gt;We made a request and confirmed that the status was successful. Now what?&lt;/p&gt;
 
@@ -425,7 +573,7 @@ Requesting data synchronously used to be the default way on how the browser work
 
 &lt;p&gt;Now you have a raw data that you can play around with!&lt;/p&gt;
 
-&lt;h3 id=&quot;synchronous-requests&quot;&gt;Synchronous Requests&lt;/h3&gt;
+&lt;h2 id=&quot;synchronous-requests&quot;&gt;Synchronous Requests&lt;/h2&gt;
 
 &lt;p&gt;We can create synchronous requests using the XMLHttpRequest object by setting the third parameter to &lt;code class=&quot;highlighter-rouge&quot;&gt;false&lt;/code&gt;. You might not notice the difference if you have a high speed internet but you can simulate a slow connection on the Network tab on your DevTools.&lt;/p&gt;
 
@@ -439,7 +587,7 @@ Requesting data synchronously used to be the default way on how the browser work
 
 &lt;p&gt;See how the screen seems to have been frozen? With a slow connection combined with a synchronous request to the server, we didn’t have a choice but to wait for the request to finish and come back before we can do something again.&lt;/p&gt;
 
-&lt;h3 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h3&gt;
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
 
 &lt;p&gt;Synchronous requests waits and blocks until the response come back. In most cases, we want to use asynchronous requests to give our users a better experience.&lt;/p&gt;
 
@@ -465,17 +613,18 @@ Requesting data synchronously used to be the default way on how the browser work
 
 &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'hello'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name></name></author><summary type="html">There are 2 types of requests that can Javascript can make: Synchronous and Asynchronous. But what is the difference between the two? And how do you make such requests?</summary></entry><entry><title type="html">On Being Productive</title><link href="http://localhost:4000/personal-development/2017/03/06/on-being-productive.html" rel="alternate" type="text/html" title="On Being Productive" /><published>2017-03-06T05:00:00+01:00</published><updated>2017-03-06T05:00:00+01:00</updated><id>http://localhost:4000/personal-development/2017/03/06/on-being-productive</id><content type="html" xml:base="http://localhost:4000/personal-development/2017/03/06/on-being-productive.html">&lt;p&gt;I’ve read a lot of articles about productivity. I like to read them because they’re motivating, promising satisfaction and a great sense of achievement. Sometimes they even introduce new apps or new methods, which are interesting discoveries on its own.&lt;/p&gt;
 
-&lt;p&gt;But a couple weeks back, I was looking at my to-do list and I realized that I had ”so much to do” but at the end of the day, I still didn’t feel productive. And for me, that was devastating because I keep pushing myself to do something – anything – just to make me feel like I’ve achieved something. That made the task less fun because I chased time and squeezed in so many things that are not so important but would have been good to get out of the way. But I was left drained, unhappy and didn’t have any time left to play.&lt;/p&gt;
+&lt;p&gt;But a couple weeks back, I was looking at my to-do list and I realized that I had ”so much to do” but at the end of the day, I still didn’t feel productive. And for me, that was devastating because I keep pushing myself to do something – anything – just to make me feel like I’ve achieved something. That made the task less fun because I chased time and squeezed in so many things that are not so important but would have been good to get out of the way. But I was left drained, unhappy and didn’t have any time left to play. So, here are my learnings.&lt;/p&gt;
 
-&lt;h2 id=&quot;learnings-and-changes&quot;&gt;Learnings and changes&lt;/h2&gt;
+&lt;h4 id=&quot;prioritise-what-is-more-important&quot;&gt;Prioritise what is more important&lt;/h4&gt;
+&lt;p&gt;Most of the time, we have “small” tasks like, grocery shopping, sending an email, etc. These things can easily add up and eat at least half of the day. Sure, crossing them off the list is a good feeling but what I’ve realized is that if I do them first, I am left with no time to do what I really wanted to do. So I do them last, or during breaks from the more important tasks.&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;Being productive doesn’t necessarily mean that you have to have a mountain of to-do list and be able to tackle them all.&lt;/strong&gt; Most of the time, these are just “small” things like, grocery shopping, sending an email, etc. These things can easily add up and eat at least half of the day. Sure, crossing them off the list is a good feeling but what I’ve realized is that if I do them first, I am left with no time to do what I really wanted to do. So I do them last, or during breaks from the more important tasks.&lt;/p&gt;
+&lt;h4 id=&quot;write-down-specific-goals&quot;&gt;Write down specific goals&lt;/h4&gt;
+&lt;p&gt;I wrote down my long-term and short-term goals. There are no deadlines so I can focus on the steps to achieve it; not on the remaining time left. Some people would prefer to have a deadline because it pushes them to do more or finish early but I think its equally important to just enjoy the the feeling of being in a state of progress.&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;Write down specific goals.&lt;/strong&gt; I wrote down my long-term and short-term goals. There are no deadlines so I can focus on the steps to achieve it; not on the remaining time left. Some people would prefer to have a deadline because it pushes them to do more or finish early but I think its equally important to just enjoy the the feeling of being in a state of progress.&lt;/p&gt;
+&lt;p&gt;As an example, one of my short-term goals is to finish &lt;a href=&quot;https://javascript30.com/&quot;&gt;Javascript 30&lt;/a&gt;. I’m not required to finish it but I would love to finish what I started. A long term goal would be to be able to speak in German. These are both in progress and deadline-free but I try to make sure that I get a little bit further than I did. That’s good enough.&lt;/p&gt;
 
-&lt;p&gt;As an example, one of my short-term goals is to finish Javascript 30. I’m not required to finish it but I would love to finish what I started. A long term goal would be to be able to speak in German. These are both in progress and deadline-free but I try to make sure that I get a little bit further than I did the day before. That’s good enough.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Plan for the next day.&lt;/strong&gt; Now that I have a specific goal that I want to achieve, I plan for the next day with those goals in mind. The way that it works for me is that I write down 3 goal-related tasks, separated from the extra ones. They are the most important and what I would spend more time on, everything else can be done during breaks between these tasks. I find planning a good way to find order and of course, sometimes things change but that’s okay.&lt;/p&gt;
+&lt;h4 id=&quot;plan-for-the-next-day&quot;&gt;Plan for the next day&lt;/h4&gt;
+&lt;p&gt;Now that I have a specific goal that I want to achieve, I plan for the next day with those goals in mind. The way that it works for me is that I write down 3 goal-related tasks, separated from the extra ones. They are the most important and what I would spend more time on, everything else can be done during breaks between these tasks. I find planning a good way to find order. Of course, sometimes things change, but that’s okay.&lt;/p&gt;
 
 &lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
 
@@ -483,30 +632,30 @@ Requesting data synchronously used to be the default way on how the browser work
 
 &lt;p&gt;As a (self-taught) developer who has only been coding for a year, I am aware that I have a huge knowledge gap. Aside from actual developer experience, I needed to be more knowledgeable in the job that I was hired for. Print and UI design has their similarities, but designing for a web application can range from being daunting or maybe even underwhelming until you knew exactly what you’re doing. At least that was how it felt like to me before I knew its importance. So, 5 lessons, here we go.&lt;/p&gt;
 
-&lt;h3 id=&quot;c-r-a-p&quot;&gt;C. R. A. P.&lt;/h3&gt;
+&lt;h4 id=&quot;c-r-a-p&quot;&gt;C. R. A. P.&lt;/h4&gt;
 
 &lt;p&gt;Contrast, Repetition, Alignment and Proximity – the 4 basic principles of design.&lt;/p&gt;
 
-&lt;h3 id=&quot;name-it-and-its-yours&quot;&gt;Name it and its yours&lt;/h3&gt;
+&lt;h4 id=&quot;name-it-and-its-yours&quot;&gt;Name it and its yours&lt;/h4&gt;
 
 &lt;p&gt;The first chapter of The &lt;a href=&quot;https://www.goodreads.com/book/show/41597.The_Non_Designer_s_Design_Book&quot;&gt;Non-Designer’s Design book&lt;/a&gt; tells of a short story of the author having an epiphany about a certain type of tree that she had never seen before. The moral of it is that, once you can name something, you’re conscious of it. You’ll see it everywhere and you’ll be in control. Name it and its yours.&lt;/p&gt;
 
-&lt;h3 id=&quot;avoid-ux-debt&quot;&gt;Avoid UX debt&lt;/h3&gt;
+&lt;h4 id=&quot;avoid-ux-debt&quot;&gt;Avoid UX debt&lt;/h4&gt;
 
 &lt;p&gt;UX Debt is an accumulation of design and development decisions that negatively impact the users of a product or service and is either intentional or unintentional that can affect users in a way that they will seek out competitors. Things like slight changes to the stack or architecture will probably not affect your users very much, but will more likely affect the developers and their productivity – this is technical debt. Visual debt, on the other hand, is more on the client side. Striving for consistency in the use of icons, typography and layout can build trust between the product and the users as well as avoiding confusion. It is helpful to be aware of these things when navigating through your product.&lt;/p&gt;
 
-&lt;h3 id=&quot;every-element-on-the-page-has-to-have-a-reason-why-its-there&quot;&gt;Every element on the page has to have a reason why its there&lt;/h3&gt;
+&lt;h4 id=&quot;every-element-on-the-page-has-to-have-a-reason-why-its-there&quot;&gt;Every element on the page has to have a reason why its there&lt;/h4&gt;
 
 &lt;p&gt;As we go about designing a web page, we must think about why we are placing an element on that particular spot. No element should be placed arbitrarily on a page. This helps me make better design decisions by asking myself questions when I’m designing or to be able to analyze designs made by others and give helpful feedback.&lt;/p&gt;
 
-&lt;h3 id=&quot;its-okay-to-break-the-rules--if-you-know-what-youre-doing&quot;&gt;It’s okay to break the rules – If you know what you’re doing&lt;/h3&gt;
+&lt;h4 id=&quot;its-okay-to-break-the-rules--if-you-know-what-youre-doing&quot;&gt;It’s okay to break the rules – If you know what you’re doing&lt;/h4&gt;
 
 &lt;p&gt;As we go about designing and follow the patterns that others have laid out upon us and what our users have grown accustomed to, we must remember that its okay to break the rules – if you know what you’re doing. The patterns are there for us to follow so that it would be easier for our users to adapt into our applications but these are rules that are not set in stone that if we do not follow, would be the end of the world. If you have a better idea and if you think that that idea is the best for your users, then go for it!&lt;/p&gt;
 
-&lt;h3 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h3&gt;
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
 &lt;p&gt;After reading 3+ books, it felt like a new window opened up and all of a sudden I can see the inconsistencies in our app, and I can decide better than when I first started. Before, I thought that good design is a gift that not everyone can have but as I grow, I realize it can be learned. The eyes and the mind can be trained to see what is good design or not.&lt;/p&gt;
 
-&lt;h4 id=&quot;recommended-ui--ux-books-so-far&quot;&gt;Recommended UI / UX books so far:&lt;/h4&gt;
+&lt;h4 id=&quot;the-books&quot;&gt;The books:&lt;/h4&gt;
 
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;https://www.uxpin.com/studio/ebooks/eliminate-ux-debt-enterprise-products/&quot;&gt;Eliminate UX Debt&lt;/a&gt; by UXPin&lt;/li&gt;
