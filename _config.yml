@@ -26,8 +26,8 @@ dribbble_username: charisseysabel
 # Build settings
 markdown: kramdown
 # theme: minima
-gems:
-  - jekyll-feed
+# gems:
+  # - jekyll-feed
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
