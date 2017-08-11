@@ -20,6 +20,12 @@
   &:visited {
     color: $brand-color;
   }
+
+  span svg {
+    width: 50px;
+    height: 50px;
+    vertical-align: middle;
+  }
 }
 
 .site-nav {

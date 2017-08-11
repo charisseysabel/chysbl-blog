@@ -166,6 +166,10 @@ pre {
   letter-spacing: 3px; }
   .site-title, .site-title:visited {
     color: #F18620; }
+  .site-title span svg {
+    width: 50px;
+    height: 50px;
+    vertical-align: middle; }
 
 .site-nav {
   float: right;
