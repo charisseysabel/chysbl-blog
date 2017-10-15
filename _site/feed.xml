@@ -1,5 +1,313 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.5.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2017-08-05T13:50:21+02:00</updated><id>http://localhost:4000/</id><title type="html">Charisse Writes</title><subtitle>Hey! I'm Charisse. I'm a web developer and artist living an (almost) zero-waste life in Berlin 🌱
-</subtitle><entry><title type="html">The Grunt Task Runner</title><link href="http://localhost:4000/tutorial/2017/08/05/the-grunt-task-runner.html" rel="alternate" type="text/html" title="The Grunt Task Runner" /><published>2017-08-05T12:00:00+02:00</published><updated>2017-08-05T12:00:00+02:00</updated><id>http://localhost:4000/tutorial/2017/08/05/the-grunt-task-runner</id><content type="html" xml:base="http://localhost:4000/tutorial/2017/08/05/the-grunt-task-runner.html">&lt;p&gt;Task runners are great for automating tasks. Small, repetitive tasks such as minifying, uglifying or even just watching our files for changes can easily take up our time.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.5.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2017-10-15T18:25:44+02:00</updated><id>http://localhost:4000/</id><title type="html">Charisse Writes</title><subtitle>Hey! I'm Charisse. I'm a web developer and artist living an (almost) zero-waste life in Berlin 🌱
+</subtitle><entry><title type="html">A Gentle Introduction to CSS Grid</title><link href="http://localhost:4000/tutorial/2017/10/15/a-gentle-introduction-to-css-grid.html" rel="alternate" type="text/html" title="A Gentle Introduction to CSS Grid" /><published>2017-10-15T09:00:00+02:00</published><updated>2017-10-15T09:00:00+02:00</updated><id>http://localhost:4000/tutorial/2017/10/15/a-gentle-introduction-to-css-grid</id><content type="html" xml:base="http://localhost:4000/tutorial/2017/10/15/a-gentle-introduction-to-css-grid.html">&lt;p&gt;I wanted to take a look at CSS Grid for quite a while, so I rebuilt an old project using it.&lt;/p&gt;
+
+&lt;p&gt;CSS Grids allow us to design a layout in a 2-dimensional style: horizontally and vertically. Unlike flexbox, which is only focused on only 1 dimension.&lt;/p&gt;
+
+&lt;p&gt;I must admit that I was a bit hesitant about the idea of Grid because of the fact that flexbox has solved the problems that I faced with layouts today (at least most of them anyway).&lt;/p&gt;
+
+&lt;h4 id=&quot;but-what-exactly-is-the-difference-between-css-grid-and-flex-box&quot;&gt;But what exactly is the difference between CSS Grid and flex box?&lt;/h4&gt;
+&lt;p&gt;Rachel Andrew’s example was a good reference point for me to understand the difference. Basically, a layout that does not depend on the content’s width and height can benefit from a Grid layout. While a layout that needs its contents to flow and stretch would most likely have to use flexbox instead. But who says you can’t use them both at the same time?&lt;/p&gt;
+
+&lt;p&gt;As a simple exercise, I want to rebuild my FCC project: Quote Generator. Currently this was built using absolute positioning, which is fine but not exactly that elegant. It’s worth looking back at it and see how CSS Grid can make a difference.&lt;/p&gt;
+
+&lt;p&gt;Imagine adding an invisible grid on top of this layout. In the graphic design world, this is like activating the rulers inside Photoshop, which is what we usually do when it comes to aligning our items perfectly on the page. We create columns to align everything vertically, and set rows to align items horizontally.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/img/with-guides.png&quot; alt=&quot;Setting guides... you know what I mean&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;how-do-we-replicate-this-in-code&quot;&gt;How do we replicate this in code?&lt;/h4&gt;
+&lt;p&gt;If you’ve used Flexbox before, then its helpful to think that it works pretty much the same for Grid: enclosing a group of elements together inside a grid display activates a bunch of other attributes that can only be used inside the grid container.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;grid-container&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;grid-item&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;A reader lives a thousand lives before he dies, the man who never reads lives only one.&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;span&amp;gt;&lt;/span&gt;Alison Croggon, the Naming&lt;span class=&quot;nt&quot;&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;nc&quot;&gt;.grid-container&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;display&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;grid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Next, we can define our columns and rows using &lt;code class=&quot;highlighter-rouge&quot;&gt;grid-template-columns&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;grid-template-rows&lt;/code&gt; which take a space-separated list of values. In our mock example, I’m setting the leftmost column to &lt;code class=&quot;highlighter-rouge&quot;&gt;300 pixels&lt;/code&gt; and let the second column occupy the rest. You can set as many as you want depending on how many elements you have inside the grid-container. If you set less values than elements, the extra elements will automatically wrap and create a new row, following the same format as the row above it.&lt;/p&gt;
+
+&lt;p&gt;I’m also setting the topmost row to be &lt;code class=&quot;highlighter-rouge&quot;&gt;200px&lt;/code&gt; high and let the second column occupy the rest of the space.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;nc&quot;&gt;.grid-container&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;display&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;grid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;py&quot;&gt;grid-template-column&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;300px&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;auto&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;py&quot;&gt;grid-template-rows&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;200px&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;auto&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/img/with-grid.png&quot; alt=&quot;Visualizing the grid&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;A grid layout also wouldn’t be complete if there’s no way to add gaps between the items. We can use &lt;code class=&quot;highlighter-rouge&quot;&gt;grid-row-gap&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;grid-column-gap&lt;/code&gt; to do just that. This might be useful should we add content to our currently-empty sidebar in the future. I like this feature a lot because it helps avoid the use of a container padding altogether.&lt;/p&gt;
+
+&lt;p&gt;Optionally, we can use &lt;code class=&quot;highlighter-rouge&quot;&gt;grid-gap&lt;/code&gt; as a shorthand notation for the 2 attributes above.&lt;/p&gt;
+
+&lt;p&gt;Now, all that’s left is to explicitly position our quote at the bottom-right of our grid. We can do this using &lt;code class=&quot;highlighter-rouge&quot;&gt;grid-column&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;grid-row&lt;/code&gt;. In the code below, we specify our item to start at grid line #2 (setting only one value makes the element stretch all the way to the last column). We do the same for the row position.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/img/grid-columns-and-rows.png&quot; alt=&quot;Grid and column lines&quot; /&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;nc&quot;&gt;.grid-item&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;grid-column&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;grid-row&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h4 id=&quot;what-about-responsiveness&quot;&gt;What about responsiveness?&lt;/h4&gt;
+&lt;p&gt;Responsiveness can be achieved through the combination of media queries and modifying our &lt;code class=&quot;highlighter-rouge&quot;&gt;grid-template-columns&lt;/code&gt; into a single value, forcing the elements to align vertically and re-arrange our grid-item’s columns and rows accordingly. It’s not very elegant, but it does the job.&lt;/p&gt;
+
+&lt;h4 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h4&gt;
+&lt;p&gt;CSS Grids allow us to design a layout in 2 dimensions: horizontally and vertically. A layout that does not depend on the content’s width and height can most certainly benefit from using Grid. Despite it being not entirely supported yet, especially in the older versions of IE, CSS Grid gives us an entirely new way of building layout for our websites. Definitely worth keeping an eye out for!&lt;/p&gt;</content><author><name></name></author><summary type="html">I wanted to take a look at CSS Grid for quite a while, so I rebuilt an old project using it.</summary></entry><entry><title type="html">Test-Driven Development with Mocha and Chai</title><link href="http://localhost:4000/tutorial/2017/09/15/test-driven-development-with-mocha-and-chai.html" rel="alternate" type="text/html" title="Test-Driven Development with Mocha and Chai" /><published>2017-09-15T09:00:00+02:00</published><updated>2017-09-15T09:00:00+02:00</updated><id>http://localhost:4000/tutorial/2017/09/15/test-driven-development-with-mocha-and-chai</id><content type="html" xml:base="http://localhost:4000/tutorial/2017/09/15/test-driven-development-with-mocha-and-chai.html">&lt;h4 id=&quot;so-what-exactly-is-test-driven-development&quot;&gt;So what exactly is Test-Driven Development?&lt;/h4&gt;
+
+&lt;p&gt;Based on my understanding after reading a couple articles, Test-Driven Development (TDD) is the process by which you write tests for your code to make sure that it works as expected. You do this even before you start to write a single line of code and then you allow your code to adapt to the test and make it pass. The benefit of it is that it helps keep your code clean and do what it’s supposed to do. With a well-written test, you can refactor your code safely over and over knowing that the functionality has not been broken.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Behavior&lt;/em&gt;-Driven Development (or BDD) is a branch of TDD. I find it really hard to figure out the difference between the two aside from the fact that BDD has a much easier to read syntax than TDD. It’s almost like a human-readable sentence! From the articles that I’ve read and the people I’ve asked, they said that BDD is almost like user stories. BDD tests the functionality as a whole, compared to TDD, which only tests a single unit or function (which is likely to be a part of the overall behaviour itself)&lt;/p&gt;
+
+&lt;h2 id=&quot;test-driven-development-with-mocha--chai&quot;&gt;Test-Driven Development with Mocha + Chai&lt;/h2&gt;
+&lt;h4 id=&quot;what-is-mocha&quot;&gt;What is Mocha?&lt;/h4&gt;
+&lt;p&gt;&lt;a href=&quot;http://mochajs.org/#installation&quot;&gt;Mocha&lt;/a&gt; is one of the popular Javascript testing framework out there. It provides us with an environment from which we can automate our tests. And that environment happens to run on NodeJS.&lt;/p&gt;
+
+&lt;h4 id=&quot;what-is-chai&quot;&gt;What is Chai?&lt;/h4&gt;
+&lt;p&gt;To write a test, we need additional plugins like Chai. Chai is an assertion library. You can think of an assertion library as a language that is spoken inside a testing framework (in our case, Mocha). You can still use vanilla JS inside a testing framework though, for example, when declaring variables and functions, but to actually do the “testing”, you have to switch to the proper language. There are many assertion libraries out there, as you can see from &lt;a href=&quot;http://mochajs.org/#assertions&quot;&gt;Mocha’s Assertions&lt;/a&gt; section.&lt;/p&gt;
+
+&lt;p&gt;I’m a bit biased in the sense that this is the testing framework and assertion library that we use at &lt;a href=&quot;https://www.small-improvements.com/&quot;&gt;Small Improvements&lt;/a&gt;, so I wanted to learn more about it and hopefully be able to contribute on this part of the codebase in the near future. But just a few google searches alone and you’ll see that there are many more frameworks out there such as &lt;a href=&quot;https://github.com/avajs/ava&quot;&gt;Ava&lt;/a&gt;, &lt;a href=&quot;http://sinonjs.org/&quot;&gt;Sinon&lt;/a&gt;, &lt;a href=&quot;https://github.com/substack/tape&quot;&gt;Tape&lt;/a&gt; and &lt;a href=&quot;https://jasmine.github.io/&quot;&gt;Jasmine&lt;/a&gt;. I haven’t actually tried them myself but I’m going to keep them at the back of my mind when building my next personal project.&lt;/p&gt;
+
+&lt;h4 id=&quot;prerequisites&quot;&gt;Prerequisites&lt;/h4&gt;
+&lt;p&gt;This tutorial assumes that you already have a project folder set up with npm and Node installed. At the time of writing, I’m using a node version &lt;strong&gt;__ and an npm version __&lt;/strong&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;c1&quot;&gt;// a very simple folder structure&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;package&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;json&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;js&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;js&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h4 id=&quot;installation&quot;&gt;Installation&lt;/h4&gt;
+&lt;p&gt;Installing a testing framework is just as easy as installing as another framework through npm:&lt;/p&gt;
+
+&lt;p&gt;On the code below, we’ll install Mocha and Chai as a local dependency on our project
+&lt;code class=&quot;highlighter-rouge&quot;&gt;npm install --save-dev mocha chai&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;warm-up-writing-our-first-test&quot;&gt;Warm up: Writing our first test&lt;/h2&gt;
+&lt;p&gt;For our Mocha interface, we will use &lt;a href=&quot;http://mochajs.org/#interfaces&quot;&gt;BDD system&lt;/a&gt; for ease of readability. The BDD system will provide us with chainable functions such as &lt;code class=&quot;highlighter-rouge&quot;&gt;describe()&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;it()&lt;/code&gt;, and &lt;code class=&quot;highlighter-rouge&quot;&gt;before()&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;First, inside &lt;code class=&quot;highlighter-rouge&quot;&gt;test.js&lt;/code&gt;, we want to &lt;em&gt;describe&lt;/em&gt; what we are testing.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;nx&quot;&gt;describe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'my function'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;The first argument is a string that describes the functionality that you’re testing. Ideally, its the function’s name but you can name it whatever you want. It’s a reference for you, so that when you run your tests later, you know exactly what they are.&lt;/p&gt;
+
+&lt;p&gt;Inside the describe block, we want to test the functionality that our function has to fulfill. We require &lt;a href=&quot;http://chaijs.com/api/assert/&quot;&gt;Chai’s assert interface&lt;/a&gt; at the top of the file and access its &lt;code class=&quot;highlighter-rouge&quot;&gt;strictEqual&lt;/code&gt; method to compare two values. For now, let’s make our test fail.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;assert&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'chai'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;assert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;describe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'my function'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;it&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'should be equal'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;isTrue&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;assert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;strictEqual&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;isTrue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;running-tests&quot;&gt;Running tests&lt;/h2&gt;
+&lt;p&gt;In our package.json, you can change the &lt;code class=&quot;highlighter-rouge&quot;&gt;tests&lt;/code&gt; script to run mocha:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;s2&quot;&gt;&quot;scripts&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;s2&quot;&gt;&quot;test&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;mocha&quot;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;and then on the Terminal, you can simply run &lt;code class=&quot;highlighter-rouge&quot;&gt;npm test&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/img/failed-test.png&quot; alt=&quot;A failed test&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Once you’ve run the command, you’ll see that your test failed because, well, your values are not strictly (===) equal. You can change either value and run the command again to see how a successful test looks like!&lt;/p&gt;
+
+&lt;h2 id=&quot;replicating-freecodecamps-piglatin-test&quot;&gt;Replicating FreeCodeCamp’s PigLatin Test&lt;/h2&gt;
+&lt;p&gt;Now that we have a basic idea on how to write tests using Mocha and Chai, let’s step our game up a bit and replicate the &lt;a href=&quot;https://www.freecodecamp.org/challenges/pig-latin&quot;&gt;PigLatin challenge on FCC&lt;/a&gt;.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;c1&quot;&gt;// index.js&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;pigLatin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;check&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'a'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'i'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'u'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'e'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'o'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;indexOf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;charAt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;?&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;check&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;substr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;check&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;concat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;check&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'w'&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;substr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;check&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'ay'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exports&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;pigLatin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// export the function so we can import it somewhere else&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;c1&quot;&gt;// test.js&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;assert&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'chai'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;assert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;pigLatin&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'./index'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;california&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;algorithm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;describe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'piglatin'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// we call the function inside the `before` block before we test it for equality&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;before&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;california&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;pigLatin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'california'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;algorithm&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;pigLatin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'algorithm'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+
+  &lt;span class=&quot;nx&quot;&gt;it&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'should return a string'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;test&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;pigLatin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'hello'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;assert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;isString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+
+  &lt;span class=&quot;nx&quot;&gt;it&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'should be aliforniacay'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;answer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'aliforniacay'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;assert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;strictEqual&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;california&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;answer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+
+  &lt;span class=&quot;nx&quot;&gt;it&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'should be algorithmway'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;answer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'algorithmway'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;assert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;strictEqual&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;algorithm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;answer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/img/passing-test.png&quot; alt=&quot;A passing test&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;We scratched the surface of Test-Driven Development and implemented tests that challenged our understanding.&lt;/p&gt;
+
+&lt;p&gt;Writing a good tests are important for every codebase. It ensures that we deliver as little buggy software to our users as possible. At first I thought that TDD is a very big and daunting task, but it turned out to be really fun!&lt;/p&gt;
+
+&lt;p&gt;What are you going to test next?&lt;/p&gt;</content><author><name></name></author><summary type="html">So what exactly is Test-Driven Development?</summary></entry><entry><title type="html">3 Things to Keep in Mind When Starting a Blog</title><link href="http://localhost:4000/personal/development/2017/09/02/3-things-to-keep-in-mind-when-starting-a-blog.html" rel="alternate" type="text/html" title="3 Things to Keep in Mind When Starting a Blog" /><published>2017-09-02T09:00:00+02:00</published><updated>2017-09-02T09:00:00+02:00</updated><id>http://localhost:4000/personal/development/2017/09/02/3-things-to-keep-in-mind-when-starting-a-blog</id><content type="html" xml:base="http://localhost:4000/personal/development/2017/09/02/3-things-to-keep-in-mind-when-starting-a-blog.html">&lt;p&gt;Sometimes we just need to remind ourselves why we want to dive into the world of blogging.&lt;/p&gt;
+
+&lt;p&gt;3 things, here we go.&lt;/p&gt;
+
+&lt;h4 id=&quot;what-is-your-goal&quot;&gt;What is your goal?&lt;/h4&gt;
+&lt;p&gt;It’s important to keep in mind why you want to start / started blogging in the first place. I firmly believe that this will help you keep going during those times when you feel like you want to quit.&lt;/p&gt;
+
+&lt;p&gt;My purpose for this blog is to be able to explain things to myself — as selfish as that sounds. Technical concepts don’t sink in in my head right away so I always need to find a way to explain it to myself in much simpler terms. I’m sure there are a lot of developers out there who feels the same way, maybe junior developers like me. If you find my stuff useful, that’s great! If I start earning money from this blog, then I would consider that as a huge bonus.&lt;/p&gt;
+
+&lt;h4 id=&quot;you-shouldnt-feel-like-you-have-to-know-everything-before-you-start-writing-about-it&quot;&gt;You shouldn’t feel like you have to know everything before you start writing about it&lt;/h4&gt;
+&lt;p&gt;As I sit here thinking about how to start my next tutorial, I started looking at similar tutorials and I realised that the topic is bigger than I thought. It made me feel like I should “back-off” because it feels like I’m not skilled enough for it. Maybe I can come back to this topic after a couple months and I wouldn’t feel such an imposter anymore. But the question is, “Will that day ever come?”&lt;/p&gt;
+
+&lt;p&gt;It’s normal to be uncomfortable with what you don’t know. The only way to get past it is to go through it with the knowledge that you already have. If you fail the first time, then at least you learned how to do better on your next try.&lt;/p&gt;
+
+&lt;p&gt;If you’re like me, who’s doubting my own blogging skills, think of this quote from the book, Developer Soft Skills:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;There is always someone out there who knows a little less than you and might find your stuff useful.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;And if not, at least pat yourself on the back for getting your head around a concept. That is an achievement on its own.&lt;/p&gt;
+
+&lt;h4 id=&quot;writing-takes-time&quot;&gt;Writing takes time&lt;/h4&gt;
+&lt;p&gt;A rarely-updated blog isn’t good if you want to get something out of it so make it a habit to write a few articles every month. For example, my current goal is to be able to publish an article every 2 weeks. You can write more or less than that, its up to you. Set up a queue of articles that will be published over a course of time so that you can have more time for other things. Be flexible and change your schedule if it ends up stressing you out.&lt;/p&gt;
+
+&lt;p&gt;Your first blog post will suck… as well as the couple ones after it. That’s okay; just keep writing and you’ll eventually get better over time.&lt;/p&gt;
+
+&lt;h4 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h4&gt;
+&lt;p&gt;Even if this post is specifically aimed at developers who want to try blogging, the concepts also apply to other activities. Whether its our goal, the money or the amount of effort it takes to work on a project, its always helpful to remind ourselves – from time to time – about the reason behind why we do certain things.&lt;/p&gt;</content><author><name></name></author><summary type="html">Sometimes we just need to remind ourselves why we want to dive into the world of blogging.</summary></entry><entry><title type="html">Living Zero Waste</title><link href="http://localhost:4000/lifestyle/2017/08/19/living-zero-waste.html" rel="alternate" type="text/html" title="Living Zero Waste" /><published>2017-08-19T09:00:00+02:00</published><updated>2017-08-19T09:00:00+02:00</updated><id>http://localhost:4000/lifestyle/2017/08/19/living-zero-waste</id><content type="html" xml:base="http://localhost:4000/lifestyle/2017/08/19/living-zero-waste.html">&lt;p&gt;Believe it or not, my Zero Waste journey started from a YouTube video. Watching TV has always been my family’s way of bonding – we would sit on the couch with a bowl of dinner on our laps and watch videos of YouTubers playing and screaming while videogames (my mom is a huge fan of video games) or just re-watch Jack Black / Jim Carrey movies after a long day of work in the family’s cafe.&lt;/p&gt;
+
+&lt;p&gt;But one night, there was a YouTube recommendation of TEDtalks and we so happen to come across a video with a clickbait title called “&lt;a href=&quot;https://www.youtube.com/watch?v=pF72px2R3Hg&amp;amp;t=423s&quot;&gt;Why I live a Zero Waste Life&lt;/a&gt;”. We were so intrigued because its hard to just imagine living without any trash, let alone to actually live it. Every single thing that we purchase comes packaged in one way or another, so is it really possible?&lt;/p&gt;
+
+&lt;p&gt;As I was watching this video, I keep seeing our trash bin from the corner of my eye. It was overflowing with trash – from plastic, to baby diapers, to carton boxes wrapped in more plastic, to paper bags – down to a tiny freebie toy that comes from a bag of chips. I clean the house everyday and I take the trash out everyday as well and I can’t help but feel good about having an empty trash can for a couple of hours. But where do those all trash go? There is a saying, “Out of sight, out of mind” and we basically do the same thing with our trash. Once its in the trash bin and the garbage man collects it and takes it away, its not our problem anymore…. right?&lt;/p&gt;
+
+&lt;p&gt;Wrong.&lt;/p&gt;
+
+&lt;p&gt;That’s why I made a decision to change.&lt;/p&gt;
+
+&lt;h2 id=&quot;what-does-it-mean-to-live-zero-waste&quot;&gt;What does it mean to live Zero Waste?&lt;/h2&gt;
+&lt;p&gt;According to Lauren Singer (the girl in the video):&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;Zero Waste means that I do not produce any garbage. No sending anything to landfill, no throwing anything in a trash can, nothing. However, I do recycle and I do compost.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;This is what I aim for.
+Nowadays, the only things that goes into my trash can are fallen hair, paper that I’ve used both sides on, and organic waste (because we don’t have brown bins in the building)&lt;/p&gt;
+
+&lt;p&gt;So the question now is, how can we actually reduce our trash?&lt;/p&gt;
+
+&lt;h2 id=&quot;the-5-rs-of-zero-waste&quot;&gt;The 5 R’s of Zero Waste&lt;/h2&gt;
+&lt;p&gt;According to Bea Johnson, the founder of the Zero Waste movement, we only have to follow 5 rules in order to live sustainably&lt;/p&gt;
+
+&lt;h4 id=&quot;refuse-what-you-dont-need&quot;&gt;Refuse what you don’t need&lt;/h4&gt;
+&lt;p&gt;Refuse paper bags, single-use plastic and disposables.
+I also refuse freebies for example, in conferences. I went to a meetup where the company who was hosting it was giving a way a tote bag with freebies including a notebook, stickers, and a powerbank. It all seems like great things to have but as the meetup was progressing, I kept asking myself, “Do I really need this?” I have a powerbank that I can barely use, I already have 4 reusable tote bags, I have tons of paper to be upcycled into a notebook and I certainly don’t find value in having that company’s sticker.&lt;/p&gt;
+
+&lt;h4 id=&quot;reduce-what-you-do-need&quot;&gt;Reduce what you do need&lt;/h4&gt;
+&lt;p&gt;Reduce the clutter in your life by getting rid of things that don’t give you value.
+Yes, this might sound like you’re giving your trash away to other people but you’ll find that those things that you don’t really need will give a ton of value to other people. For example, your clothes. How much of those do you actually wear and how much of those are actually just sitting in the back of the cabinet waiting for the “perfect occasion”?&lt;/p&gt;
+
+&lt;p&gt;I once bought a flowery skirt thinking that maybe one day I’ll feel girly enough to wear it. I gave it away unused because that day never came. I didn’t miss that skirt at all.&lt;/p&gt;
+
+&lt;p&gt;Strive to live minimally. Let go of the things that are laying around in your garage, cabinets, boxes, etc. We need less than we think we do.&lt;/p&gt;
+
+&lt;h4 id=&quot;reuse-by-swapping-for-reusables&quot;&gt;Reuse by swapping for reusables&lt;/h4&gt;
+&lt;p&gt;Some people say that if you’re going Zero Waste, you have to start from scratch. People say that you need to have a stainless steel water bottle, a stainless steel or glass containers, etc. I think that’s wrong.&lt;/p&gt;
+
+&lt;p&gt;Tupperwares may be made of plastic, but I don’t feel the need to give it away because I can reuse it for a very long time. Anything that you already have and that can be reused like a water bottle, bento box, etc in place of disposable ones are good enough.&lt;/p&gt;
+
+&lt;h4 id=&quot;recycle-what-you-cannot-refuse-reduce-or-reuse&quot;&gt;Recycle what you cannot refuse, reduce or reuse&lt;/h4&gt;
+&lt;p&gt;Once you’ve refused, reduced, and reused most of your stuff, you’ll find that you don’t really have much to send to the recycling facility and that’s great because let’s face it – you can only recycle something a couple times.&lt;/p&gt;
+
+&lt;p&gt;When we send something to be recycled, often times those things get mixed in with other things in order for them to become new products and those products might not be recyclable anymore because it might not be possible to break its components down into reusable pieces and so eventually, they still go to the landfill. I’ve heard / read things like “paper can only be recycled 5 to 7 times” and the more you recycle them, the more chemicals they need to be made into paper again :(&lt;/p&gt;
+
+&lt;h4 id=&quot;rot-compost-the-rest&quot;&gt;Rot (compost) the rest&lt;/h4&gt;
+&lt;p&gt;This is the part of living Zero Waste that I haven’t yet achieved because I live in a shared flat without a garden nor a brown bin for organic waste. But I’ve been looking for ways to change it, for example, joining a local community garden where I can bring my organic waste that can be mixed in soil that will serve as fertiliser. Maybe this time I can fulfill my dream of growing my own food. I might even learn some German farming words&lt;/p&gt;
+
+&lt;p&gt;And that’s it! I found that once you follow these 5 principles, you’ll soon earn its benefits.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-benefits-of-living-zero-waste&quot;&gt;The Benefits of Living Zero Waste&lt;/h2&gt;
+&lt;h4 id=&quot;helps-the-environment&quot;&gt;Helps the environment&lt;/h4&gt;
+&lt;p&gt;You send little to nothing to the landfill, you reuse what’s already out there and you don’t contribute to the demand for things that reduces our natural resources.&lt;/p&gt;
+
+&lt;h4 id=&quot;health-improvements&quot;&gt;Health improvements&lt;/h4&gt;
+&lt;p&gt;When you live Zero Waste, its normal that you have to cook. And when you cook your own food with raw ingredients, you know what goes in it. You don’t have products laying around with ingredients you can’t even pronounce.&lt;/p&gt;
+
+&lt;h4 id=&quot;more-freedom&quot;&gt;More freedom&lt;/h4&gt;
+&lt;p&gt;It’s not just physical freedom of having more space. But also having the time to do what’s more important.&lt;/p&gt;
+
+&lt;h4 id=&quot;teaches-you-to-live-slow&quot;&gt;Teaches you to live slow&lt;/h4&gt;
+&lt;p&gt;What does it mean to live slow?
+We live in a world right now where everything demands our attention and we react by doing the same. When we live in the fast lane, we often overlook many things and we tend to get stressed faster and sometimes, we often fail to see that happiness or love is where we already are.&lt;/p&gt;
+
+&lt;p&gt;Once we start slowing down, we tend to become more mindful and we notice the things we haven’t before. Our minds are free of clutter and we tend to become more grateful and energetic and less stressed and don’t easily get “bogged” (is that a word?) down on the negative stuff.&lt;/p&gt;
+
+&lt;h4 id=&quot;saves-you-&quot;&gt;Saves you $$$&lt;/h4&gt;
+&lt;p&gt;This is both a yes and no answer because frankly, some unpackaged stuff can be more expensive that their packaged friends. But remember: what you buy, you vote for.&lt;/p&gt;
+
+&lt;p&gt;It saves you money because 1: you spend waaaaaayyyy less than you did before and 2: you only spend for what needs to be replaced – a shirt that’s too small, food, etc.&lt;/p&gt;
+
+&lt;p&gt;All these benefits sounds great, right? So how do you get started?&lt;/p&gt;
+
+&lt;h2 id=&quot;how-to-get-started&quot;&gt;How to Get Started&lt;/h2&gt;
+&lt;h4 id=&quot;first-look-at-your-trash&quot;&gt;First, Look at your trash&lt;/h4&gt;
+&lt;p&gt;When you come home tonight, don’t just mindlessly throw your trash in the bin. Look at it. See what’s in there. You’ll find that most of the things that you throw away are things that you can find alternatives for or maybe even stuff that you can live without.
+If you don’t know what your problem is, you can’t find the solution for it.&lt;/p&gt;
+
+&lt;h4 id=&quot;start-small&quot;&gt;Start small&lt;/h4&gt;
+&lt;p&gt;As much as you want to live without trash from now on, change takes time. You want to introduce small changes in your life so that you don’t overwhelm yourself and raise your hands one day and say, “Nope, can’t do this; it’s too difficult”.&lt;/p&gt;
+
+&lt;p&gt;Start forming a habit of skipping the aisle in the grocery store until you get used to it. Make it a habit to go to the bulk store every week. Change is hard but if you keep doing it, it will become easier and will become normal. It will become normal to refuse plastic. It will become normal to have reusable bags in your backpack for impromptu trips to the market.&lt;/p&gt;
+
+&lt;p&gt;The first thing that I quit was individually-wrapped chocolate (because I love chocolate and I used to eat a couple after every meal). Then I moved to using newspaper for picking up my dog’s waste. Then I stopped buying juice and made my own (tastes so much better). Then it goes on and on and on.&lt;/p&gt;
+
+&lt;h4 id=&quot;be-creative&quot;&gt;Be creative&lt;/h4&gt;
+&lt;p&gt;There was a time when I was cooking almost the same meals every week and eventually I started getting the feeling that I’m getting so tired of the taste of cauliflower. But it turns out that there’s so many cauliflower recipes out there and the last cauliflower dish I cooked didn’t taste like cauliflower at all. I made vegetarian meatballs out of cauliflower, quinoa and some rice. I’ve never had quinoa before but I was so excited to try out something new.&lt;/p&gt;
+
+&lt;p&gt;When you’re excited, you have fun. When you’re having fun, what you do doesn’t feel like a task.
+Being creative also forces you to think of alternatives. Need an all-purpose cleaner? Make your own. Need to clean the windows? All you need is damp newspaper.&lt;/p&gt;
+
+&lt;h4 id=&quot;stick-to-your-values&quot;&gt;Stick to your values&lt;/h4&gt;
+&lt;p&gt;Living Zero Waste will constantly challenge you to refuse, reduce and reuse. At some point, I asked myself:
+“Why am I doing this again? Why should spend 2 hours of my day commuting back and forth to the bulk store when the supermarket is right around the corner and has everything that I need?”&lt;/p&gt;
+
+&lt;p&gt;The answer: It’s because I want to live in a way that aligns with my values. I value the environment (we all do in one way or another). I value my health and I value my family’s health that’s why I would go so far as buying something organic even if it costs a little more. Money is not the reason why I’m living this way (but that doesn’t mean I don’t have a budget)&lt;/p&gt;
+
+&lt;p&gt;So get some alone time and try to get to know yourself because when the time comes that you have to make a decision, your values will help you decide if its the right thing to do.&lt;/p&gt;
+
+&lt;h4 id=&quot;pay-it-forward&quot;&gt;Pay it forward&lt;/h4&gt;
+&lt;p&gt;If you know someone who might be interested in this idea, tell it to them. You don’t have to tell them that they should do it but rather, help them become aware of this idea. I shared this lifestyle to everyone because I realised that I can’t save the world on my own.&lt;/p&gt;
+
+&lt;p&gt;We don’t have to wait for a climate change agreement. Change starts from us. Change starts from our home and the more other people see the good changes in our lives, the more likely they will be inspired to try it out.&lt;/p&gt;</content><author><name></name></author><summary type="html">Believe it or not, my Zero Waste journey started from a YouTube video. Watching TV has always been my family’s way of bonding – we would sit on the couch with a bowl of dinner on our laps and watch videos of YouTubers playing and screaming while videogames (my mom is a huge fan of video games) or just re-watch Jack Black / Jim Carrey movies after a long day of work in the family’s cafe.</summary></entry><entry><title type="html">The Grunt Task Runner</title><link href="http://localhost:4000/tutorial/2017/08/05/the-grunt-task-runner.html" rel="alternate" type="text/html" title="The Grunt Task Runner" /><published>2017-08-05T12:00:00+02:00</published><updated>2017-08-05T12:00:00+02:00</updated><id>http://localhost:4000/tutorial/2017/08/05/the-grunt-task-runner</id><content type="html" xml:base="http://localhost:4000/tutorial/2017/08/05/the-grunt-task-runner.html">&lt;p&gt;Task runners are great for automating tasks. Small, repetitive tasks such as minifying, uglifying or even just watching our files for changes can easily take up our time.&lt;/p&gt;
 
 &lt;p&gt;I’ve read some articles online that says automation was once done using shell scripts. I haven’t really tried that myself (but now I’m really curious) but now that frontend technologies have evolved drastically these past few years, task runners like &lt;a href=&quot;https://gulpjs.com/&quot;&gt;Gulp&lt;/a&gt; and &lt;a href=&quot;https://gruntjs.com/&quot;&gt;Grunt&lt;/a&gt; took our frontend environment another step forward.&lt;/p&gt;
 
@@ -628,37 +936,4 @@ Requesting data synchronously used to be the default way on how the browser work
 
 &lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
 
-&lt;p&gt;The greatest takeaway for me by doing this is that I am able to have more sense of achievement by doing less. I have time to breathe and play and still feel like I have progressed. It’s important to keep in mind that you don’t have to do everything all in one day. Celebrate the progress. In this era where everything is moving so fast, it’s always okay to go slow.&lt;/p&gt;</content><author><name></name></author><summary type="html">I’ve read a lot of articles about productivity. I like to read them because they’re motivating, promising satisfaction and a great sense of achievement. Sometimes they even introduce new apps or new methods, which are interesting discoveries on its own.</summary></entry><entry><title type="html">5 Lessons from Reading 3 UI/UX Books</title><link href="http://localhost:4000/design/2016/11/06/5-lessons-from-3-ui-ux-books.html" rel="alternate" type="text/html" title="5 Lessons from Reading 3 UI/UX Books" /><published>2016-11-06T05:00:00+01:00</published><updated>2016-11-06T05:00:00+01:00</updated><id>http://localhost:4000/design/2016/11/06/5-lessons-from-3-ui-ux-books</id><content type="html" xml:base="http://localhost:4000/design/2016/11/06/5-lessons-from-3-ui-ux-books.html">&lt;p&gt;I’ve been out of the blogging wagon for a long time – but for a good reason! I was hired as a Junior UI Developer at &lt;a href=&quot;https://www.small-improvements.com/&quot;&gt;Small Improvements&lt;/a&gt; and have been living in Berlin since September. I’ll skip everything about how I get hired for another post and focus more on the current topic.&lt;/p&gt;
-
-&lt;p&gt;As a (self-taught) developer who has only been coding for a year, I am aware that I have a huge knowledge gap. Aside from actual developer experience, I needed to be more knowledgeable in the job that I was hired for. Print and UI design has their similarities, but designing for a web application can range from being daunting or maybe even underwhelming until you knew exactly what you’re doing. At least that was how it felt like to me before I knew its importance. So, 5 lessons, here we go.&lt;/p&gt;
-
-&lt;h4 id=&quot;c-r-a-p&quot;&gt;C. R. A. P.&lt;/h4&gt;
-
-&lt;p&gt;Contrast, Repetition, Alignment and Proximity – the 4 basic principles of design.&lt;/p&gt;
-
-&lt;h4 id=&quot;name-it-and-its-yours&quot;&gt;Name it and its yours&lt;/h4&gt;
-
-&lt;p&gt;The first chapter of The &lt;a href=&quot;https://www.goodreads.com/book/show/41597.The_Non_Designer_s_Design_Book&quot;&gt;Non-Designer’s Design book&lt;/a&gt; tells of a short story of the author having an epiphany about a certain type of tree that she had never seen before. The moral of it is that, once you can name something, you’re conscious of it. You’ll see it everywhere and you’ll be in control. Name it and its yours.&lt;/p&gt;
-
-&lt;h4 id=&quot;avoid-ux-debt&quot;&gt;Avoid UX debt&lt;/h4&gt;
-
-&lt;p&gt;UX Debt is an accumulation of design and development decisions that negatively impact the users of a product or service and is either intentional or unintentional that can affect users in a way that they will seek out competitors. Things like slight changes to the stack or architecture will probably not affect your users very much, but will more likely affect the developers and their productivity – this is technical debt. Visual debt, on the other hand, is more on the client side. Striving for consistency in the use of icons, typography and layout can build trust between the product and the users as well as avoiding confusion. It is helpful to be aware of these things when navigating through your product.&lt;/p&gt;
-
-&lt;h4 id=&quot;every-element-on-the-page-has-to-have-a-reason-why-its-there&quot;&gt;Every element on the page has to have a reason why its there&lt;/h4&gt;
-
-&lt;p&gt;As we go about designing a web page, we must think about why we are placing an element on that particular spot. No element should be placed arbitrarily on a page. This helps me make better design decisions by asking myself questions when I’m designing or to be able to analyze designs made by others and give helpful feedback.&lt;/p&gt;
-
-&lt;h4 id=&quot;its-okay-to-break-the-rules--if-you-know-what-youre-doing&quot;&gt;It’s okay to break the rules – If you know what you’re doing&lt;/h4&gt;
-
-&lt;p&gt;As we go about designing and follow the patterns that others have laid out upon us and what our users have grown accustomed to, we must remember that its okay to break the rules – if you know what you’re doing. The patterns are there for us to follow so that it would be easier for our users to adapt into our applications but these are rules that are not set in stone that if we do not follow, would be the end of the world. If you have a better idea and if you think that that idea is the best for your users, then go for it!&lt;/p&gt;
-
-&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;After reading 3+ books, it felt like a new window opened up and all of a sudden I can see the inconsistencies in our app, and I can decide better than when I first started. Before, I thought that good design is a gift that not everyone can have but as I grow, I realize it can be learned. The eyes and the mind can be trained to see what is good design or not.&lt;/p&gt;
-
-&lt;h4 id=&quot;the-books&quot;&gt;The books:&lt;/h4&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.uxpin.com/studio/ebooks/eliminate-ux-debt-enterprise-products/&quot;&gt;Eliminate UX Debt&lt;/a&gt; by UXPin&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.uxpin.com/studio/ebooks/ux-design-definitive-beginner-guide/&quot;&gt;UX Design: the Definitive Beginner’s Guide&lt;/a&gt; by UXPin&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.goodreads.com/book/show/41597.The_Non_Designer_s_Design_Book&quot;&gt;The Non-Designer’s Design book&lt;/a&gt; by Robin Williams&lt;/li&gt;
-&lt;/ul&gt;</content><author><name></name></author><summary type="html">I’ve been out of the blogging wagon for a long time – but for a good reason! I was hired as a Junior UI Developer at Small Improvements and have been living in Berlin since September. I’ll skip everything about how I get hired for another post and focus more on the current topic.</summary></entry></feed>
+&lt;p&gt;The greatest takeaway for me by doing this is that I am able to have more sense of achievement by doing less. I have time to breathe and play and still feel like I have progressed. It’s important to keep in mind that you don’t have to do everything all in one day. Celebrate the progress. In this era where everything is moving so fast, it’s always okay to go slow.&lt;/p&gt;</content><author><name></name></author><summary type="html">I’ve read a lot of articles about productivity. I like to read them because they’re motivating, promising satisfaction and a great sense of achievement. Sometimes they even introduce new apps or new methods, which are interesting discoveries on its own.</summary></entry></feed>
