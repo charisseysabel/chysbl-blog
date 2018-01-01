@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "2017: A Year of Change and the Road Ahead"
-date: 2017-12-16 09:00:00 +0200
+date: 2017-12-31 09:00:00 +0200
 categories: personal
 ---
 
