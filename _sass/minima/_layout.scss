@@ -157,6 +157,14 @@
   list-style: none;
   margin-left: 0;
   text-align: right;
+
+  li {
+    display: inline;
+
+    svg path:hover {
+      fill: $brand-color;
+    }
+  }
 }
 
 .username {
