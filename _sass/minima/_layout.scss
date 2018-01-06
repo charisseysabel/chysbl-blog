@@ -188,9 +188,7 @@
 }
 
 .page-heading {
-  font-size: $base-font-size;
-  text-transform: uppercase;
-  letter-spacing: 3px;
+  color: $grey-color;
 }
 
 .post-list {
@@ -208,6 +206,7 @@
 }
 
 .post-meta {
+  font-family: $highlight-font;
   font-size: $small-font-size;
   text-transform: uppercase;
   color: $grey-color;
