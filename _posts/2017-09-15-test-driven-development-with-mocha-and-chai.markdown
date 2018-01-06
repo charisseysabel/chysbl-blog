@@ -4,7 +4,7 @@ title:  "Test-Driven Development with Mocha and Chai"
 date:   2017-09-15 09:00:00 +0200
 categories: tutorial
 ---
-#### So what exactly is Test-Driven Development?
+So what exactly is Test-Driven Development?
 
 Based on my understanding after reading a couple articles, Test-Driven Development (TDD) is the process by which you write tests for your code to make sure that it works as expected. You do this even before you start to write a single line of code and then you allow your code to adapt to the test and make it pass. The benefit of it is that it helps keep your code clean and do what it’s supposed to do. With a well-written test, you can refactor your code safely over and over knowing that the functionality has not been broken.
 
