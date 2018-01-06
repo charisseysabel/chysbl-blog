@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Assistant:400,600,700");
 @import url("https://fonts.googleapis.com/css?family=Merriweather");
+@import url("https://fonts.googleapis.com/css?family=Inconsolata");
 /**
  * Reset some basic elements
  */
@@ -106,6 +107,9 @@ code {
   font-size: 15px;
   border-radius: 3px;
   background-color: #eaeaea; }
+  pre span,
+  code span {
+    font-family: "Inconsolata", "Courier New", monospace; }
 
 code {
   padding: 1px 5px; }
@@ -333,6 +337,10 @@ pre {
 /**
  * Posts
  */
+.post-width {
+  width: 650px;
+  margin: 0 auto; }
+
 .post-header {
   margin-bottom: 20px;
   text-align: center; }
@@ -352,11 +360,14 @@ pre {
     margin-bottom: 0; }
   .post-content h2 {
     font-weight: 600;
+    text-align: center;
+    margin-bottom: 20px;
     font-size: 32px; }
     @media screen and (max-width: 800px) {
       .post-content h2 {
         font-size: 28px; } }
   .post-content h3 {
+    text-align: center;
     font-size: 26px; }
     @media screen and (max-width: 800px) {
       .post-content h3 {
