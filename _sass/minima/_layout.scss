@@ -13,7 +13,7 @@
     background: linear-gradient(30deg, #F08891 10%, #FDEA60);
     display: flex;
     justify-content: center;
-    margin: #{$spacing-unit / 2} 0;
+    margin: #{$spacing-unit / 2} 0 #{$spacing-unit + 10} 0;
     padding: #{$spacing-unit * 3} 0;
   }
 
@@ -153,6 +153,10 @@
   text-align: right;
 }
 
+.username {
+  font-family: $base-font-family;
+}
+
 .footer-col-wrapper {
   @include relative-font-size(0.9375);
   color: $grey-color;
@@ -212,10 +216,6 @@
  */
 .page-content {
   padding: $spacing-unit 0;
-}
-
-.page-heading {
-  color: $grey-color;
 }
 
 .post-list {
