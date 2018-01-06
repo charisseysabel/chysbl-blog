@@ -192,7 +192,8 @@ pre {
   margin-bottom: 0;
   text-transform: uppercase;
   float: left;
-  letter-spacing: 3px; }
+  letter-spacing: 3px;
+  font-family: "Assistant", "Helvetica Neue", Helvetica, Arial, sans-serif; }
   .site-title, .site-title:visited {
     color: #F18620; }
   .site-title span svg {
@@ -313,7 +314,7 @@ pre {
  * Page content
  */
 .page-content {
-  padding: 20px 0; }
+  padding: 0 0 60px 0; }
 
 .post-list {
   margin-left: 0;
@@ -380,6 +381,7 @@ pre {
         font-size: 18px; } }
 
 .pagination {
+  align-items: center;
   display: flex;
   justify-content: space-between;
   margin: 20px 0; }

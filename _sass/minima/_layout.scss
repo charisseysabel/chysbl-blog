@@ -42,6 +42,7 @@
   text-transform: uppercase;
   float: left;
   letter-spacing: 3px;
+  font-family: $highlight-font;
 
   &,
   &:visited {
@@ -215,7 +216,7 @@
  * Page content
  */
 .page-content {
-  padding: $spacing-unit 0;
+  padding: 0 0 #{$spacing-unit * 3} 0;
 }
 
 .post-list {
@@ -309,6 +310,7 @@
 
 
 .pagination {
+  align-items: center;
   display: flex;
   justify-content: space-between;
   margin: $spacing-unit 0;
