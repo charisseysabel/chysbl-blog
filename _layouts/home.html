@@ -2,24 +2,34 @@
 layout: default
 ---
 
-<div class="home">
+<div class="banner-container">
+  <div class="banner-content">
+    <span>Welcome!</span>
+    <h1 class="title">I'm Charisse</h1>
+    <span class="subtitle">Web developer and designer</span>
+  </div>
+</div>
 
-  <h1 class="page-heading">Posts</h1>
+<div class="wrapper">
+  <div class="home">
 
-  {{ content }}
+    <h1 class="page-heading">Posts</h1>
 
-  <ul class="post-list">
-    {% for post in site.posts %}
-      <li>
-        <h2>
-          <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
-        </h2>
-        {{post.excerpt}}
+    {{ content }}
 
-        {% assign date_format = site.minima.date_format | default: "%b %-d, %Y" %}
-        <span class="post-meta">{{ post.date | date: date_format }}</span>
-      </li>
-    {% endfor %}
-  </ul>
+    <ul class="post-list">
+      {% for post in site.posts %}
+        <li>
+          <h2>
+            <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+          </h2>
+          {{post.excerpt}}
 
+          {% assign date_format = site.minima.date_format | default: "%b %-d, %Y" %}
+          <span class="post-meta">{{ post.date | date: date_format }}</span>
+        </li>
+      {% endfor %}
+    </ul>
+
+  </div>
 </div>

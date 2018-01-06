@@ -119,8 +119,7 @@ pre {
  * Wrapper
  */
 .wrapper {
-  max-width: -webkit-calc(800px - (20px * 2));
-  max-width: calc(800px - (100px * 2));
+  max-width: 800px;
   margin-right: auto;
   margin-left: auto;
   padding-right: 20px;
@@ -162,6 +161,23 @@ pre {
 .site-header {
   min-height: 37.3px;
   position: relative; }
+
+.banner-container {
+  background: linear-gradient(30deg, #F08891 10%, #FDEA60);
+  display: flex;
+  justify-content: center;
+  margin: 10px 0;
+  padding: 60px 0; }
+.banner-content {
+  width: 800px; }
+  .banner-content span, .banner-content h1 {
+    color: #fdfdfd; }
+  .banner-content span {
+    font-family: "Assistant", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 18px; }
+  .banner-content .title {
+    font-family: "Merriweather", serif;
+    margin: 0 0 -15px 0; }
 
 .site-title {
   line-height: 64.8px;
@@ -322,7 +338,7 @@ pre {
   font-size: 42px;
   letter-spacing: -1px;
   line-height: 1;
-  font-weight: 700; }
+  font-weight: 600; }
   @media screen and (max-width: 800px) {
     .post-title {
       font-size: 36px; } }
