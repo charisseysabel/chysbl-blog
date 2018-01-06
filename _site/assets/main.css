@@ -379,6 +379,20 @@ pre {
       .post-content h4 {
         font-size: 18px; } }
 
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0; }
+  .pagination .page {
+    border: 1px solid;
+    padding: 10px 20px; }
+    .pagination .page-none {
+      color: #828282; }
+    .pagination .page:hover {
+      background: #F18620;
+      color: #fdfdfd;
+      text-decoration: none; }
+
 /**
  * Syntax highlighting styles
  */

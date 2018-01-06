@@ -306,3 +306,25 @@
     }
   }
 }
+
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  margin: $spacing-unit 0;
+
+  .page {
+    border: 1px solid;
+    padding: #{$spacing-unit / 2} $spacing-unit;
+
+    &-none {
+      color: $grey-color;
+    }
+
+    &:hover {
+      background: $brand-color;
+      color: $background-color;
+      text-decoration: none;
+    }
+  }
+}
