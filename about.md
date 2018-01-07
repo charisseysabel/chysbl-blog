@@ -3,7 +3,7 @@ layout: page
 title: About
 permalink: /about/
 ---
-![A picture of me]({{ site.url }}/assets/img/my-face.JPG)
+![A picture of me]({{ site.url }}/assets/img/my-face.jpg)
 
 <div class="post-width">
     <p>Hello, I'm Charisse. Welcome to my blog!</p>
