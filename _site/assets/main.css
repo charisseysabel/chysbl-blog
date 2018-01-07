@@ -42,9 +42,10 @@ ul, ol, dl, figure,
 /**
  * Images
  */
-img {
+p img {
   max-width: 100%;
-  vertical-align: middle; }
+  margin: 0 auto;
+  display: block; }
 
 /**
  * Figures
@@ -209,7 +210,7 @@ pre {
   .site-nav .menu-icon {
     display: none; }
   .site-nav .page-link {
-    color: #424242;
+    color: #F18620;
     line-height: 1.8; }
     .site-nav .page-link:not(:last-child) {
       margin-right: 20px; }
