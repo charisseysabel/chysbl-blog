@@ -2,24 +2,44 @@
 layout: default
 ---
 
-<div class="home">
+<div class="banner-container">
+  <div class="banner-content">
+    <span>Welcome!</span>
+    <h1 class="title">I'm Charisse</h1>
+    <span class="subtitle">I talk about the web, design and personal development</span>
+  </div>
+</div>
 
-  <h1 class="page-heading">Posts</h1>
+<div class="wrapper">
+  <div class="home">
 
-  {{ content }}
+    {{ content }}
 
-  <ul class="post-list">
-    {% for post in site.posts %}
-      <li>
-        {% assign date_format = site.minima.date_format | default: "%b %-d, %Y" %}
-        <span class="post-meta">{{ post.date | date: date_format }}</span>
+    <ul class="post-list">
+      {% for post in paginator.posts %}
+        <li>
+          <h2>
+            <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+          </h2>
+          {{post.excerpt}}
 
-        <h2>
-          <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
-        </h2>
-        {{post.excerpt}}
-      </li>
-    {% endfor %}
-  </ul>
+          {% assign date_format = site.minima.date_format | default: "%b %-d, %Y" %}
+          <span class="post-meta">{{ post.date | date: date_format }}</span>
+        </li>
+      {% endfor %}
+    </ul>
 
+  <div class="pagination">
+    {% if paginator.previous_page %}
+      <a href="{{ paginator.previous_page_path }}" class="page previous">← Previous</a>
+    {% else %}
+      <span></span>
+    {% endif %}
+    <span class="page_number ">{{ paginator.page }} of {{ paginator.total_pages }}</span>
+    {% if paginator.next_page %}
+      <a href="{{ paginator.next_page_path }}" class="page next">Next →</a>
+    {% else %}
+      <span></span>
+    {% endif %}
+  </div>
 </div>

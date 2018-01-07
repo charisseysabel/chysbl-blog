@@ -29,6 +29,10 @@ hr {
   margin: 20px 0;
 }
 
+span {
+  font-family: $highlight-font;
+}
+
 /**
  * Set `margin-bottom` to maintain vertical rhythm
  */
@@ -85,6 +89,8 @@ li {
  */
 h1, h2, h3, h4, h5, h6 {
   font-weight: $base-font-weight;
+  font-family: $highlight-font;
+  color: $brand-color;
 }
 
 
@@ -138,6 +144,10 @@ code {
   @include relative-font-size(0.9375);
   border-radius: 3px;
   background-color: #eaeaea;
+
+  span {
+    font-family: $code-font;
+  }
 }
 
 code {
@@ -161,8 +171,7 @@ pre {
  * Wrapper
  */
 .wrapper {
-  max-width: -webkit-calc(#{$content-width} - (#{$spacing-unit} * 2));
-  max-width:         calc(#{$content-width} - (#{$spacing-unit} * 2));
+  max-width: $content-width;
   margin-right: auto;
   margin-left: auto;
   padding-right: $spacing-unit;

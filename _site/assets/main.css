@@ -1,4 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Assistant:400,600,700");
+@import url("https://fonts.googleapis.com/css?family=Merriweather");
+@import url("https://fonts.googleapis.com/css?family=Inconsolata");
 /**
  * Reset some basic elements
  */
@@ -12,7 +14,7 @@ dl, dd, ol, ul, figure {
  * Basic styling
  */
 body {
-  font: 400 18px/1.5 "Assistant", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font: 400 16px/1.8 "Merriweather", serif;
   color: #424242;
   background-color: #fdfdfd;
   -webkit-text-size-adjust: 100%;
@@ -24,6 +26,9 @@ body {
 
 hr {
   margin: 20px 0; }
+
+span {
+  font-family: "Assistant", "Helvetica Neue", Helvetica, Arial, sans-serif; }
 
 /**
  * Set `margin-bottom` to maintain vertical rhythm
@@ -48,7 +53,7 @@ figure > img {
   display: block; }
 
 figcaption {
-  font-size: 15.75px; }
+  font-size: 15px; }
 
 /**
  * Lists
@@ -64,7 +69,9 @@ li > ol {
  * Headings
  */
 h1, h2, h3, h4, h5, h6 {
-  font-weight: 400; }
+  font-weight: 400;
+  font-family: "Assistant", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #F18620; }
 
 /**
  * Links
@@ -97,9 +104,12 @@ blockquote {
  */
 pre,
 code {
-  font-size: 16.875px;
+  font-size: 15px;
   border-radius: 3px;
   background-color: #eaeaea; }
+  pre span,
+  code span {
+    font-family: "Inconsolata", "Courier New", monospace; }
 
 code {
   padding: 1px 5px; }
@@ -116,8 +126,7 @@ pre {
  * Wrapper
  */
 .wrapper {
-  max-width: -webkit-calc(800px - (20px * 2));
-  max-width: calc(800px - (20px * 2));
+  max-width: 800px;
   margin-right: auto;
   margin-left: auto;
   padding-right: 20px;
@@ -160,13 +169,31 @@ pre {
   min-height: 37.3px;
   position: relative; }
 
+.banner-container {
+  background: linear-gradient(30deg, #F08891 10%, #FDEA60);
+  display: flex;
+  justify-content: center;
+  margin: 10px 0 30px 0;
+  padding: 60px 0; }
+.banner-content {
+  width: 800px; }
+  .banner-content span, .banner-content h1 {
+    color: #fdfdfd; }
+  .banner-content span {
+    font-family: "Assistant", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 18px; }
+  .banner-content .title {
+    font-family: "Merriweather", serif;
+    margin: 0 0 -15px 0; }
+
 .site-title {
-  line-height: 60.75px;
+  line-height: 64.8px;
   letter-spacing: -1px;
   margin-bottom: 0;
   text-transform: uppercase;
   float: left;
-  letter-spacing: 3px; }
+  letter-spacing: 3px;
+  font-family: "Assistant", "Helvetica Neue", Helvetica, Arial, sans-serif; }
   .site-title, .site-title:visited {
     color: #F18620; }
   .site-title span svg {
@@ -176,14 +203,14 @@ pre {
 
 .site-nav {
   float: right;
-  line-height: 60.75px; }
+  line-height: 64.8px; }
   .site-nav .nav-trigger {
     display: none; }
   .site-nav .menu-icon {
     display: none; }
   .site-nav .page-link {
     color: #424242;
-    line-height: 1.5; }
+    line-height: 1.8; }
     .site-nav .page-link:not(:last-child) {
       margin-right: 20px; }
   @media screen and (max-width: 600px) {
@@ -233,7 +260,7 @@ pre {
   padding: 20px 0; }
 
 .footer-heading {
-  font-size: 20.25px;
+  font-size: 18px;
   margin-bottom: 10px; }
 
 .contact-list,
@@ -242,8 +269,11 @@ pre {
   margin-left: 0;
   text-align: right; }
 
+.username {
+  font-family: "Merriweather", serif; }
+
 .footer-col-wrapper {
-  font-size: 16.875px;
+  font-size: 15px;
   color: #828282;
   margin-left: -10px; }
 
@@ -284,12 +314,7 @@ pre {
  * Page content
  */
 .page-content {
-  padding: 20px 0; }
-
-.page-heading {
-  font-size: 18px;
-  text-transform: uppercase;
-  letter-spacing: 3px; }
+  padding: 0 0 60px 0; }
 
 .post-list {
   margin-left: 0;
@@ -301,29 +326,34 @@ pre {
       font-weight: 600; }
 
 .post-meta {
-  font-size: 15.75px;
+  font-family: "Assistant", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 15px;
   text-transform: uppercase;
   color: #828282; }
 
 .post-link {
   display: block;
-  font-size: 27px; }
+  font-size: 24px; }
 
 /**
  * Posts
  */
+.post-width {
+  width: 650px;
+  margin: 0 auto; }
+
 .post-header {
   margin-bottom: 20px;
   text-align: center; }
 
 .post-title {
-  font-size: 47.25px;
+  font-size: 42px;
   letter-spacing: -1px;
   line-height: 1;
-  font-weight: 700; }
+  font-weight: 600; }
   @media screen and (max-width: 800px) {
     .post-title {
-      font-size: 40.5px; } }
+      font-size: 36px; } }
 
 .post-content {
   margin-bottom: 20px; }
@@ -331,21 +361,39 @@ pre {
     margin-bottom: 0; }
   .post-content h2 {
     font-weight: 600;
-    font-size: 36px; }
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 32px; }
     @media screen and (max-width: 800px) {
       .post-content h2 {
-        font-size: 31.5px; } }
+        font-size: 28px; } }
   .post-content h3 {
-    font-size: 29.25px; }
+    text-align: center;
+    font-size: 26px; }
     @media screen and (max-width: 800px) {
       .post-content h3 {
-        font-size: 24.75px; } }
+        font-size: 22px; } }
   .post-content h4 {
-    font-size: 22.5px;
+    font-size: 20px;
     font-weight: 600; }
     @media screen and (max-width: 800px) {
       .post-content h4 {
-        font-size: 20.25px; } }
+        font-size: 18px; } }
+
+.pagination {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0; }
+  .pagination .page {
+    border: 1px solid;
+    padding: 10px 20px; }
+    .pagination .page-none {
+      color: #828282; }
+    .pagination .page:hover {
+      background: #F18620;
+      color: #fdfdfd;
+      text-decoration: none; }
 
 /**
  * Syntax highlighting styles
