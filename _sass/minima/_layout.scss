@@ -251,8 +251,8 @@
  * Posts
  */
 .post-width {
-  width: $post-width;
-  margin: 0 auto;
+  max-width: $post-width;
+  margin: #{$spacing-unit * 3} auto 0 auto;
 }
 
 .post-header {

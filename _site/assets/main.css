@@ -340,8 +340,8 @@ pre {
  * Posts
  */
 .post-width {
-  width: 650px;
-  margin: 0 auto; }
+  max-width: 650px;
+  margin: 60px auto 0 auto; }
 
 .post-header {
   margin-bottom: 20px;
