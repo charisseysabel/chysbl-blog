@@ -147,11 +147,24 @@
   margin-bottom: $spacing-unit / 2;
 }
 
+.footer-mail {
+  text-align: right;
+  margin-bottom: 0;
+}
+
 .contact-list,
 .social-media-list {
   list-style: none;
   margin-left: 0;
   text-align: right;
+
+  li {
+    display: inline;
+
+    svg path:hover {
+      fill: $brand-color;
+    }
+  }
 }
 
 .username {

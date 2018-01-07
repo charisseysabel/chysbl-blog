@@ -264,11 +264,21 @@ pre {
   font-size: 18px;
   margin-bottom: 10px; }
 
+.footer-mail {
+  text-align: right;
+  margin-bottom: 0; }
+
 .contact-list,
 .social-media-list {
   list-style: none;
   margin-left: 0;
   text-align: right; }
+  .contact-list li,
+  .social-media-list li {
+    display: inline; }
+    .contact-list li svg path:hover,
+    .social-media-list li svg path:hover {
+      fill: #F18620; }
 
 .username {
   font-family: "Merriweather", serif; }
