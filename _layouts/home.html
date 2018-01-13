@@ -23,8 +23,19 @@ layout: default
           </h2>
           {{post.excerpt}}
 
-          {% assign date_format = site.minima.date_format | default: "%b %-d, %Y" %}
-          <span class="post-meta">{{ post.date | date: date_format }}</span>
+          <div class="post-meta">
+            {% assign date_format = site.minima.date_format | default: "%b %-d, %Y" %}
+            <span>{{ post.date | date: date_format }}</span>
+
+            {% if post.categories %}
+            • <ul class="tags">
+                {% for tag in post.categories %}
+                  <li class="tag"></liclass>#{{ tag }}</li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+
+          </div>
         </li>
       {% endfor %}
     </ul>

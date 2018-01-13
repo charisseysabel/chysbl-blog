@@ -406,6 +406,15 @@ pre {
       color: #fdfdfd;
       text-decoration: none; }
 
+.tags {
+  display: inline;
+  list-style-type: none;
+  margin: 0;
+  text-transform: lowercase; }
+  .tags li {
+    display: inline;
+    margin-right: 5px; }
+
 /**
  * Syntax highlighting styles
  */

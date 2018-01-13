@@ -343,3 +343,15 @@
     }
   }
 }
+
+.tags {
+  display: inline;
+  list-style-type: none;
+  margin: 0;
+  text-transform: lowercase;
+
+  li {
+    display: inline;
+    margin-right: #{$spacing-unit / 4};
+  }
+}
