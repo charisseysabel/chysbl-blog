@@ -10,21 +10,21 @@ I’ve heard of CSS Custom Properties before, although I didn’t think about us
 ## Motivation
 One of the most convenient features of a CSS Preprocessors is the fact that you can create variables, much like the same way as how you declare a variable in other programming languages. It makes our lives easier by following the DRY principle. You can even create an entire file made up of just variables and reference it everywhere! But one catch is that CSS preprocessors needs to be compiled first; you can’t change the values dynamically with JS.
 
-After attending Beyond Tellerrand conference in Berlin last November 2017, I got very inspired to learn more and take action to make our application accessible after watching a [talk by Robin Christopherson](https://beyondtellerrand.com/events/berlin-2017/speakers/robin-christopherson#talk). He showed us how disabled people like him (in his case, he’s blind) use the web. It was an eye-opening experience.
+After attending Beyond Tellerrand conference in Berlin last November 2017, I got very inspired to learn more and take action to make our application accessible after watching a [talk by Robin Christopherson](https://beyondtellerrand.com/events/berlin-2017/speakers/robin-christopherson#talk). He showed us how disabled people like him (he’s blind and uses Assistive Technology) use the web. It was an eye-opening experience.
 
-Even though the use of CSS Custom Properties is not a solution that fits all I think we can still take advantage of it to create an option for users to opt into a more accessible colour palettes if they want to, while still allow websites/companies to stick to their brand colours by default. It’s a win-win solution, I think.
+Even though the use of CSS Custom Properties is not a solution that fits all, I think we can still take advantage of it to create an option for users to opt into a more accessible colour palettes if they want to, while still allow websites/companies to stick to their brand colours by default. It’s a win-win solution, I think.
 
-In the end, it’s not just about making an application accessible, but its also a chance to personalise the applications that we use. To make it more “our style”. I see it already in many other applications. Whenever I read an article on Pocket for example, I sometimes prefer to read it on a dark background just because I want to.
+In the end, it’s not just about making an application accessible, but its also a chance to personalise the applications that we use. To make it more “our style”. I've seen it already in many other applications. Whenever I read an article on Pocket for example, I sometimes prefer to read it on a dark background just because I want to.
 
 Another benefit of using CSS Custom Properties is that, it does not require much refactoring, (at least in my opinion). A website or application can have as much as hundreds of thousands of lines of code for styles alone! A framework can be a good option if you’re just starting from the ground up, but it can be quite expensive to spend a month refactoring style sheets. And I’m not sure anyone would enjoy doing that.
 
 ## Prerequisite
 I’m going to skip the basics of CSS Custom Properties because there’s tons of tutorials online about it already.
 
-Also, the following code snippets will be using React!
+Also, the following code snippets will be using React, so some knowledge of that would be good too.
 
-## Declare the Variables
-The first thing that we’re going to do is to declare our variables in the `:root` pseudo-selector. This will mount on to the `html` tag itself, although its not limited to that. CSS Custom Properties can be declared inside any selector. But unlike preprocessor variables, they cannot be declared on their own.
+## Declare the variables
+The first thing that we’re going to do is to declare our variables in the `:root` pseudo-selector, although its not limited to that. CSS Custom Properties can be declared inside any selector. But unlike preprocessor variables, they cannot be declared on their own.
 
 {% highlight css %}
 /* valid */
@@ -42,18 +42,19 @@ The first thing that we’re going to do is to declare our variables in the `:ro
 --standardPadding: 20px;
 {% endhighlight %}
 
-If you have a file with all of your preprocessor variables, you can simply migrate them and declare them onto the `:root` pseudo-selector. In my opinion, it is nice to have them all available but it also creates unnecessary clutter on the global namespace so I would suggest to limit the amount of variables that will be declared in the `:root` pseudo-selector. Since I’m only concerned with making an accessible colour palette — I want all colours throughout the application to reflect the changes when they are updated — I’d set that as my limit and declare other variables in a scope instead.
+If you have a file with all of your preprocessor variables, you can simply migrate them and declare them onto the `:root` pseudo-selector. In my opinion, it is nice to have them all available but it also creates unnecessary clutter on the global namespace so I would suggest to limit the amount of variables that will be declared in the `:root` pseudo-selector and declare other variables in a scope instead.
 
 ## Change colours dynamically
-Suppose that we have a page that looks like this:
+Suppose that you have a text on a colored background like so:
 
-*insert image / codepen here*
+<p data-height="265" data-theme-id="0" data-slug-hash="eVyGLY" data-default-tab="result" data-user="charisseysabel" data-embed-version="2" data-pen-title="Contrast Check Fail" class="codepen">See the Pen <a href="https://codepen.io/charisseysabel/pen/eVyGLY/">Contrast Check Fail</a> by Charisse (<a href="https://codepen.io/charisseysabel">@charisseysabel</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
-If we analyse it using the colour contrast checker, we realise that the colour palette of this page does not provide contrast that’s high enough for other people to comprehend (no matter how much we justify that the palette is beautiful).
+If we analyse it using the [colour contrast checker](https://webaim.org/resources/contrastchecker/), we realise that the colour palette doesn't reach any of the suggested contrast levels (no matter how much we justify that pink salmon is beautiful).
 
-Since we already have the default variables in place, we can come up with an alternative colour palette that has a higher contrast by playing with the colours in the contrast checker. Then we can change the theme when an event has occurred.
+Once we already have the default variables in place, we can come up with an alternative colour palette that has a higher contrast by playing with the colours in the contrast checker. Then we can change the theme when an event has occurred.
 
-In this example, we want the colours to change when a user chooses a different colour from the dropdown or revert it back to the default.
+In this example, we want to enable a high contrast mode when the user clicks on the button.
 
 {% highlight javascript %}
 // App.js
@@ -74,18 +75,18 @@ class App extends Component {
   }
 
   render() {
-        return (
-          <div className="App">
-            <header className="App-header">
-               <h1 className="App-title">Banner text</h1>
-              <button onClick={this.changeColor}
-                className="App-button">
-                Enable Color Contrast Mode
-              </button>
-             </header>
-          </div>
-        );
-      }
+    return (
+      <div className="App">
+        <header className="App-header">
+          <h1 className="App-title">Banner text</h1>
+          <button onClick={this.changeColor}
+            className="App-button">
+            Enable Color Contrast Mode
+          </button>
+        </header>
+      </div>
+    );
+  }
 }
 
 export default App;
@@ -119,9 +120,7 @@ export default App;
 ## Persist Configuration
 We have all the mechanism in place but whenever we refresh the page, the configuration is gone. At this point, I thought of using LocalStorage. Its a cheap and easy way to save the configuration. Caching is probably a better solution, but I have yet to learn that so I’ll stick with LocalStorage for now.
 
-I decided to create a copy of our variables in the browser’s LocalStorage. Whenever we select a new color, it will update the LocalStorage and we will reference the new colours from there.
-
-Once we have that in place, we have to make sure that when the component mounts, it should check the LocalStorage first and apply the configuration when possible.
+We also have to make sure that when the component mounts, it should check the LocalStorage first and apply the configuration if its available.
 
 {% highlight javascript %}
 import React, { Component } from 'react';
@@ -142,25 +141,25 @@ class App extends Component {
 
   changeColor() {
     const storage = window.localStorage;
-    const color = storage.getItem('textColor') == 'white' ? 'salmon' : 'white';
+    const color = storage.getItem('textColor') == 'white' ? 'black' : 'white';
 
     storage.setItem('textColor', color);
     document.documentElement.style.setProperty('--textColor', storage.getItem('textColor'));
   }
 
   render() {
-        return (
-          <div className="App">
-            <header className="App-header">
-               <h1 className="App-title">Banner text</h1>
-              <button onClick={this.changeColor}
-                className="App-button">
-                Enable Color Contrast Mode
-              </button>
-             </header>
-          </div>
-        );
-      }
+    return (
+      <div className="App">
+        <header className="App-header">
+          <h1 className="App-title">Banner text</h1>
+          <button onClick={this.changeColor}
+            className="App-button">
+            Enable Color Contrast Mode
+          </button>
+        </header>
+      </div>
+    );
+   }
 }
 
 export default App;
