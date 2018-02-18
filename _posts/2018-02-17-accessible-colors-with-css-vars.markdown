@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Accessible Colors with CSS Custom Properties"
+title: "Generate Accessible Color Palettes with CSS Custom Properties"
 date: 2018-02-17 09:00:00 +0200
 categories: tutorial
 ---
@@ -67,9 +67,10 @@ class App extends Component {
     this.changeColor = this.changeColor.bind(this);
   }
 
+  // very simple example but you get the point
   changeColor() {
     const color = document.documentElement.style.getPropertyValue('--textColor');
-    const value = color == 'teal' || color == '' ? 'salmon' : 'teal';
+    const value = (color === 'white' || color === '') ? 'black' : 'white';
 
     document.documentElement.style.setProperty('--textColor', value);
   }
@@ -81,7 +82,7 @@ class App extends Component {
           <h1 className="App-title">Banner text</h1>
           <button onClick={this.changeColor}
             className="App-button">
-            Enable Color Contrast Mode
+            Enable High Contrast Mode
           </button>
         </header>
       </div>
@@ -96,7 +97,7 @@ export default App;
 /* App.css */
 :root {
   --bannerBg: salmon;
-  --textColor: teal;
+  --textColor: white;
 }
 
 .App-header {
@@ -118,9 +119,9 @@ export default App;
 {% endhighlight %}
 
 ## Persist Configuration
-We have all the mechanism in place but whenever we refresh the page, the configuration is gone. At this point, I thought of using LocalStorage. Its a cheap and easy way to save the configuration. Caching is probably a better solution, but I have yet to learn that so I’ll stick with LocalStorage for now.
+We have all the mechanism in place but whenever we refresh the page, the configuration is gone. At this point, I thought of using localStorage. Its a cheap and easy way to save the configuration. Caching is probably a better solution, but I have yet to learn that so I’ll stick with localStorage for now.
 
-We also have to make sure that when the component mounts, it should check the LocalStorage first and apply the configuration if its available.
+We also have to make sure that when the component mounts, it should check the localStorage first and apply the configuration if its available.
 
 {% highlight javascript %}
 import React, { Component } from 'react';
@@ -132,7 +133,8 @@ class App extends Component {
     this.changeColor = this.changeColor.bind(this);
   }
 
-  // make sure that LocalStorage is actually available and that we use the configuration if it was ever configured.
+  // make sure that localStorage is actually available and usable
+  // and a configuration was actually saved in storage.
   componentWillMount() {
     if(window.localStorage && window.localStorage.length > 0) {
       document.documentElement.style.setProperty('--textColor', window.localStorage.getItem('textColor'));
@@ -141,8 +143,9 @@ class App extends Component {
 
   changeColor() {
     const storage = window.localStorage;
-    const color = storage.getItem('textColor') == 'white' ? 'black' : 'white';
+    const color = storage.getItem('textColor') === 'white' ? 'black' : 'white';
 
+    // override color in localStorage and assign the new color to the CSS Custom Property
     storage.setItem('textColor', color);
     document.documentElement.style.setProperty('--textColor', storage.getItem('textColor'));
   }
@@ -165,6 +168,8 @@ class App extends Component {
 export default App;
 {% endhighlight %}
 
+Now when we refresh the page, the colors -- whether in high contrast mode or not -- should persist.
+
 
 ## Final Thoughts
-I personally really like this simple solution to solve the problem of inaccessible colours. Its a small project, but it was really fun and doesn’t require too much overhead. I am looking forward to explore this topic again in the future, maybe to cache the theme instead of using LocalStorage, or use a different technology altogether.
+I personally really like this simple solution to solve the problem of inaccessible colours. Its a small project, but it was really fun and doesn’t require too much overhead. I am looking forward to explore this topic again in the future, maybe to cache the theme instead of using localStorage, or use a different technology altogether.
