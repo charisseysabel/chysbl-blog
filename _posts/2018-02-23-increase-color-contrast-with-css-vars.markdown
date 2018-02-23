@@ -19,7 +19,7 @@ In the end, it’s not just about making an application accessible, but its also
 Another benefit of using CSS Custom Properties is that, it does not require much refactoring, (at least in my opinion). A website or application can have as much as hundreds of thousands of lines of code for styles alone! A framework can be a good option if you’re just starting from the ground up, but it can be quite expensive to spend a month refactoring style sheets. And I’m not sure anyone would enjoy doing that.
 
 ## Prerequisite
-I’m going to skip the basics of CSS Custom Properties because there’s tons of tutorials online about it already. See the Further Reads at the bottom of this post!
+I’m going to skip the basics of CSS Custom Properties because there’s tons of tutorials online about it already.
 
 Also, the following code snippets will be using React, so some knowledge of that would be good too. I used `create-react-app` for this short tutorial.
 
@@ -148,99 +148,52 @@ We have all the mechanism in place but whenever we refresh the page, the configu
 
 I want to make sure that when the component mounts, it should check the localStorage first and apply the configuration and update it when the configuration has changed.
 
+Then, when the component mounts, I want to check if the theme mode has already been saved in localStorage. If it's there, we call the `setTheme` method. Otherwise, we move on.
 {% highlight javascript %}
-// App.js
-import React, { Component } from 'react';
-import './App.css';
-import {findIndex} from 'lodash/fp';
-
-const MODE = {
-  dark: {
-    '--greyBg': '#525252',
-  },
-  light: {
-    '--greyBg': '#ccc',
-  }
-}
-
-class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      theme: 'light',
-    }
-    this.setTheme = this.setTheme.bind(this);
-    this.updateColors = this.updateColors.bind(this);
-    this.updateStorage = this.updateStorage.bind(this);
-  }
-
-  componentDidMount() {
-    if (window.localStorage && findIndex(item => item === 'theme', window.localStorage) != -1) {
+// inside App component
+...
+componentDidMount() {
+    if (window.localStorage && window.localStorage.getItem('theme') != undefined) {
       const theme = window.localStorage.getItem('theme');
-      this.setState({
-        theme: theme,
-      });
-      this.updateColors(theme);
+      this.setTheme(theme);
     }
   }
-
-  setTheme(e) {
-    this.setState({
-      theme: e,
-    })
-    this.updateColors(e);
-  }
-
-  updateColors(theme) {
-    Object.keys(MODE[theme]).forEach((color) => {
-      document.documentElement.style.setProperty(color, MODE[theme][color]);
-    })
-    this.updateStorage(theme);
-  }
-
-  updateStorage(theme) {
-    if (!window.localStorage) {
-      return;
-    }
-
-    // make sure that localStorage is actually available and usable
-    const storage = window.localStorage;
-    const storedTheme = storage.getItem('theme');
-    if (storedTheme === theme) {
-      return;
-    }
-
-    storage.setItem('theme', theme);
-  }
-
-  render() {
-    return (
-      <div className="App">
-        <header>
-          <h1 className="App-title">Banner text</h1>
-          <form>
-            <label htmlFor="dark">High Contrast Mode</label>
-            <input type="radio" name="theme" value="dark" id="dark" checked={this.state.theme === 'dark'} onChange={(e) => this.setTheme(e.target.value)}/>
-
-            <label htmlFor="light">Default Mode</label>
-            <input type="radio" name="theme" value="light" id="light" checked={this.state.theme === 'light'} onChange={(e) => this.setTheme(e.target.value)}/>
-          </form>
-        </header>
-      </div>
-    );
-  }
-}
-
-export default App;
-
+...
 {% endhighlight %}
 
-Now when we refresh the page, the colors -- whether in high contrast mode or not -- should persist! Yay!
+We also need to update localStorage when select between the two radio buttons. For this, we create a new method `updateStorage`
+{% highlight javascript %}
+// inside App component
+...
+updateColors(theme) {
+  Object.keys(MODE[theme]).forEach((color) => {
+    document.documentElement.style.setProperty(color, MODE[theme][color]);
+  })
+  this.updateStorage(theme);
+}
+
+updateStorage(theme) {
+  if (!window.localStorage) {
+    return;
+  }
+
+  // make sure that localStorage is actually available and usable
+  const storage = window.localStorage;
+  const storedTheme = storage.getItem('theme');
+  if (storedTheme === theme) {
+    return;
+  }
+
+  storage.setItem('theme', theme);
+}
+{% endhighlight %}
+
+(You can check out the completed code from [this Gist](https://gist.github.com/charisseysabel/defbbe21b5a031d89f0c4aa4ba7dc1db))
+
+Now when we refresh the page, the colors -- whether in high contrast mode or not -- should persist! We can also add as many colors as we want to update in the `MODE` object and every element that uses that variable will change. Yay!
 
 
 ## Final thoughts
 I personally really like this simple solution to solve the problem of inaccessible colours. We used CSS Custom Properties to dynamically update the styles across the entire application where the custom property has been set and stored the theme in localStorage so that our browser can remember the configuration.
 
 Its a small project, but it was really fun and doesn’t require too much overhead. I am looking forward to explore this topic again in the future, maybe to cache the theme instead of using localStorage, or use a different technology altogether.
-
-### Further reads
