@@ -146,9 +146,7 @@ export default App;
 ## Persist configuration
 We have all the mechanism in place but whenever we refresh the page, the configuration is gone. At this point, I thought of using localStorage. Its a cheap and easy way to save the configuration. The downside is that if you try to view the page in a different browser, our saved configuration won't take effect. Right now, I don't know what's the better way of storing such things, so I'll stick to localStorage for now.
 
-I want to make sure that when the component mounts, it should check the localStorage first and apply the configuration and update it when the configuration has changed.
-
-Then, when the component mounts, I want to check if the theme mode has already been saved in localStorage. If it's there, we call the `setTheme` method. Otherwise, we move on.
+When the component mounts, I want to check if the theme has already been saved in localStorage. If it's there, we call the `setTheme` method. Otherwise, we move on.
 {% highlight javascript %}
 // inside App component
 ...
@@ -161,7 +159,7 @@ componentDidMount() {
 ...
 {% endhighlight %}
 
-We also need to update localStorage when select between the two radio buttons. For this, we create a new method `updateStorage`
+We also need to update localStorage when we select between the two radio buttons. For this, we create a new method `updateStorage`
 {% highlight javascript %}
 // inside App component
 ...
